@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - John Smith</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/project.css' %}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="max-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">John.dev</a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Header -->
+    <header class="projects-header">
+        <h1>Projects</h1>
+        <p>Yaratdığım innovativ layihələr və həllər</p>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Layihələrdə axtar...">
+                </div>
+                <div class="filter-tags">
+                    <button class="filter-tag active" data-category="all">Hamısı</button>
+                    <button class="filter-tag" data-category="web">Web App</button>
+                    <button class="filter-tag" data-category="mobile">Mobile</button>
+                    <button class="filter-tag" data-category="api">API</button>
+                    <button class="filter-tag" data-category="ai">AI/ML</button>
+                    <button class="filter-tag" data-category="ecommerce">E-commerce</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Stats -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="project-stats">
+                <div class="stat-card">
+                    <i class="fas fa-rocket stat-icon"></i>
+                    <span class="stat-number" data-count="50">0</span>
+                    <div class="stat-label">Tamamlanmış Layihə</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users stat-icon"></i>
+                    <span class="stat-number" data-count="25">0</span>
+                    <div class="stat-label">Xoş Müştəri</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-alt stat-icon"></i>
+                    <span class="stat-number" data-count="5">0</span>
+                    <div class="stat-label">İl Təcrübə</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy stat-icon"></i>
+                    <span class="stat-number" data-count="99">0</span>
+                    <div class="stat-label">Uğur Dərəcəsi</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1 -->
+                <article class="project-card" data-category="web api">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-description">
+                            Tam funksional e-ticaret platforması real-time inventory management, 
+                            ödəniş inteqrasiyası və AI-powered məsləhətlər sistemi ilə.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card" data-category="mobile api">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Task Management App</h3>
+                        <p class="project-description">
+                            Real-time task management mobil tətbiqi offline dəstək, team collaboration 
+                            və avtomatik reminder sistemi ilə.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Socket.io</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-google-play"></i> Play Store
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card" data-category="ai api">
+                    <div class="project-image">
+                        <i class="fas fa-robot project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Content Generator</h3>
+                        <p class="project-description">
+                            GPT-4 əsaslı kontent generasiya platforması multi-language dəstək, 
+                            SEO optimizasiya və content analytics ilə.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Try It
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-card" data-category="web ecommerce">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <p class="project-description">
+                            Real-time data analytics dashboard interaktiv qrafiklər, 
+                            custom reports və automated insights ilə.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">InfluxDB</span>
+                            <span class="tech-tag">WebSocket</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="project-card" data-category="api mobile">
+                    <div class="project-image">
+                        <i class="fas fa-cloud project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Cloud Storage API</h3>
+                        <p class="project-description">
+                            Scalable cloud storage API real-time file synchronization, 
+                            advanced security və cross-platform dəstək ilə.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">gRPC</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-book"></i> API Docs
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 6 -->
+                <article class="project-card" data-category="ai web">
+                    <div class="project-image">
+                        <i class="fas fa-brain project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">ML Model Serving</h3>
+                        <p class="project-description">
+                            Machine learning model serving platform auto-scaling, 
+                            model versioning və performance monitoring ilə.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">Prometheus</span>
+                            <span class="tech-tag">MLflow</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-server"></i> Deploy
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">John.dev</div>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="projects.html" class="footer-link">Projects</a>
+                <a href="blog.html" class="footer-link">Blog</a>
+                <a href="index.html#contact" class="footer-link">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'assets/js/project.js' %}"></script>
+
+</body>
+</html>

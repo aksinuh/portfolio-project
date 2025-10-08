@@ -1,0 +1,1033 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aksinh.dev - Python Backend Developer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <style>
+        /* Gündüz Modu CSS Variables */
+        .light-theme {
+            --dark-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(102, 126, 234, 0.3);
+        }
+
+        /* Light Theme Navigation */
+        .light-theme .max-navbar {
+            background: linear-gradient(354deg, #e3f2fd 0%, #f5f7fa 100%);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* Light Theme Hero Section */
+        .light-theme .hero {
+            background: linear-gradient(359deg, #e3f2fd 0%, #f5f7fa 100%);
+        }
+
+        .light-theme .hero::before {
+            background: radial-gradient(circle at 30% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+        }
+
+        /* Light Theme Sections */
+        .light-theme .about {
+            background: linear-gradient(180deg, #f5f7fa 0%, #e3f2fd 100%);
+        }
+
+        .light-theme .projects {
+            background: linear-gradient(355deg, #e3f2fd 0%, #f0f4f8 100%);
+        }
+
+        .light-theme .blog {
+            background: linear-gradient(129deg, #f5f7fa 0%, #e3f2fd 100%);
+        }
+
+        .light-theme .experience {
+            background: linear-gradient(237deg, #f5f7fa 0%, #e3f2fd 100%);
+        }
+
+        .light-theme .contact {
+            background: linear-gradient(190deg, #e3f2fd 0%, #f5f7fa 100%);
+        }
+
+        /* Light Theme Cards */
+        .light-theme .stat-item,
+        .light-theme .code-window,
+        .light-theme .skill-category,
+        .light-theme .project-card,
+        .light-theme .blog-card,
+        .light-theme .timeline-content,
+        .light-theme .contact-item,
+        .light-theme .contact-form {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .light-theme .stat-label,
+        .light-theme .project-description,
+        .light-theme .blog-excerpt,
+        .light-theme .timeline-description,
+        .light-theme .contact-details p {
+            color: #4a5568;
+        }
+
+        /* Light Theme Footer */
+        .light-theme .footer {
+            background: linear-gradient(349deg, #e3f2fd 0%, #f5f7fa 100%);
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .light-theme .footer::before {
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+        }
+
+        .light-theme .social-link {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            color: #2d3748;
+        }
+
+        .light-theme .footer-title {
+            color: #2d3748;
+        }
+
+        .light-theme .footer-links a,
+        .light-theme .tech-item {
+            color: #4a5568;
+        }
+
+        .light-theme .footer-links a:hover,
+        .light-theme .tech-item:hover {
+            color: #2d3748;
+        }
+
+        .light-theme .footer-bottom {
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            color: #4a5568;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: rotate(30deg);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Mobile Theme Toggle */
+        .theme-toggle-mobile {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .theme-toggle-mobile:hover {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .light-theme .theme-toggle-mobile:hover {
+            background: var(--primary-gradient);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="max-navbar" id="max-navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Aksinh.dev</a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Gündüz/Gecə Modu Butonu -->
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <a href="#contact" class="hire-btn">
+                    <i class="fas fa-handshake"></i> Hire Me
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="mobile-menu-item active">🏠 Home</a>
+        <a href="#about" class="mobile-menu-item">👨‍💻 About</a>
+        <a href="#projects" class="mobile-menu-item">🚀 Projects</a>
+        <a href="#blog" class="mobile-menu-item">📝 Blog</a>
+        <a href="#experience" class="mobile-menu-item">💼 Experience</a>
+        <a href="#contact" class="mobile-menu-item">📞 Contact</a>
+        
+        <!-- Mobile Theme Toggle -->
+        <button class="mobile-menu-item theme-toggle-mobile" id="themeToggleMobile">
+            🌙 Toggle Theme
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <div class="profile-placeholder">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+                
+                <!-- Animated Tech Icons Around Profile -->
+                <div class="tech-orbit">
+                    <div class="tech-icon" title="Python - Programming Language">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="tech-icon" title="Django - Web Framework">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="tech-icon" title="FastAPI - Modern API Framework">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="tech-icon" title="PostgreSQL - Database">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="tech-icon" title="Redis - In-Memory Database">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <div class="tech-icon" title="Docker - Containerization">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="tech-icon" title="AWS - Cloud Platform">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="tech-icon" title="MongoDB - NoSQL Database">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <h1>Akşin Nəzirov</h1>
+            <p class="subtitle">
+                <span class="typing-text" id="typingText">Python Backend Developer</span>
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="cta-button">
+                    <i class="fas fa-code"></i> View My Work
+                </a>
+                <a href="#contact" class="cta-button cta-secondary">
+                    <i class="fas fa-envelope"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            
+            <div class="about-content">
+                <div class="slide-in-left">
+                    <p class="about-text">
+                        I'm a passionate <strong>Python Backend Developer</strong> with 5+ years of experience crafting 
+                        robust, scalable web applications and APIs. I specialize in modern Python frameworks, 
+                        cloud technologies, and microservices architecture that power exceptional digital experiences.
+                    </p>
+                    <p class="about-text">
+                        My expertise lies in building high-performance backend systems that handle millions 
+                        of requests while maintaining optimal speed, reliability, and security. I believe in 
+                        writing clean, maintainable code and following industry best practices.
+                    </p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item fade-in">
+                            <span class="stat-number" data-count="150">0</span>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <span class="stat-number" data-count="5">0</span>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <span class="stat-number" data-count="200">0</span>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                        <div class="stat-item fade-in">
+                            <span class="stat-number" data-count="99">0</span>
+                            <div class="stat-label">Success Rate %</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-visual slide-in-right">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                            <span class="code-filename">developer.py</span>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line">
+                                <span class="line-number">1</span>
+                                <span class="code-keyword">class</span> <span class="code-function">PythonDeveloper</span>:
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">2</span>
+                                <span style="margin-left: 20px;"><span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">3</span>
+                                <span style="margin-left: 40px;">self.name = <span class="code-string">"John Smith"</span></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">4</span>
+                                <span style="margin-left: 40px;">self.skills = [<span class="code-string">"Python"</span>, <span class="code-string">"Django"</span>]</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">5</span>
+                                <span style="margin-left: 40px;">self.passion = <span class="code-string">"Backend Development"</span></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">6</span>
+                                <span style="margin-left: 40px;">self.experience = <span class="code-string">"5+ years"</span></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">7</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">8</span>
+                                <span style="margin-left: 20px;"><span class="code-keyword">def</span> <span class="code-function">build_amazing_apps</span>(self):</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">9</span>
+                                <span style="margin-left: 40px;"><span class="code-keyword">return</span> <span class="code-string">"Scalable & Robust Solutions"</span></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">10</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">11</span>
+                                <span class="code-comment"># Always learning and growing! 🚀</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-container fade-in">
+                <h3 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--text-primary); font-weight: 800;">Technical Arsenal</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3><i class="fab fa-python"></i> Backend Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">GraphQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-database"></i> Databases & Storage</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">ElasticSearch</span>
+                            <span class="skill-tag">SQLite</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fab fa-aws"></i> Cloud & DevOps</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">Terraform</span>
+                            <span class="skill-tag">Jenkins</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Celery</span>
+                            <span class="skill-tag">RabbitMQ</span>
+                            <span class="skill-tag">Nginx</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Postman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+           <h2 class="section-title fade-in">Featured Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Platform API</h3>
+                        <p class="project-description">
+                            A comprehensive microservices-based e-commerce API with advanced features including 
+                            real-time inventory management, payment processing, AI-powered recommendations, 
+                            and advanced analytics dashboard.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">Celery</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Analytics Dashboard API</h3>
+                        <p class="project-description">
+                            High-performance analytics API serving real-time data with complex aggregations, 
+                            ML-powered insights, interactive data visualization endpoints, and automated reporting systems.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">Grafana</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-robot project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Chatbot Backend</h3>
+                        <p class="project-description">
+                            Intelligent conversational AI backend with natural language processing, 
+                            context awareness, multi-platform integration, and advanced machine learning capabilities.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Try It
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-cloud project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Microservices Architecture</h3>
+                        <p class="project-description">
+                            Scalable microservices platform with API gateway, service discovery, 
+                            distributed tracing, automated deployment pipelines, and comprehensive monitoring.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">gRPC</span>
+                            <span class="tech-tag">Prometheus</span>
+                            <span class="tech-tag">Istio</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Architecture
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-lock project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Authentication Service</h3>
+                        <p class="project-description">
+                            Enterprise-grade authentication and authorization service with OAuth2, 
+                            JWT tokens, MFA, comprehensive security features, and SSO integration.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">OAuth2</span>
+                            <span class="tech-tag">2FA</span>
+                            <span class="tech-tag">LDAP</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-book"></i> Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <i class="fas fa-stream project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Real-time Data Pipeline</h3>
+                        <p class="project-description">
+                            High-throughput data processing pipeline with stream processing, 
+                            event sourcing, real-time analytics, and automated data quality monitoring.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Apache Kafka</span>
+                            <span class="tech-tag">Apache Spark</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">InfluxDB</span>
+                            <span class="tech-tag">Airflow</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-chart-bar"></i> Metrics
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section blog">
+        <div class="container">
+            <h2 class="section-title fade-in">Latest Blog Posts</h2>
+            
+            <div class="blog-grid">
+                <div class="blog-card fade-in" onclick="openBlogModal('blog1')">
+                    <div class="blog-image">
+                        <i class="fas fa-rocket"></i>
+                        <div class="blog-date">Jan 15, 2025</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">Python Development</div>
+                        <h3 class="blog-title">Building Scalable APIs with FastAPI</h3>
+                        <p class="blog-excerpt">
+                            Learn how to create high-performance APIs using FastAPI, including best practices 
+                            for authentication, validation, and database integration...
+                        </p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock"></i> 8 min read</span>
+                            <a href="#" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in" onclick="openBlogModal('blog2')">
+                    <div class="blog-image">
+                        <i class="fas fa-database"></i>
+                        <div class="blog-date">Jan 10, 2025</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">Database Design</div>
+                        <h3 class="blog-title">PostgreSQL Performance Optimization</h3>
+                        <p class="blog-excerpt">
+                            Advanced techniques for optimizing PostgreSQL performance, including indexing strategies, 
+                            query optimization, and connection pooling...
+                        </p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock"></i> 12 min read</span>
+                            <a href="#" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in" onclick="openBlogModal('blog3')">
+                    <div class="blog-image">
+                        <i class="fab fa-docker"></i>
+                        <div class="blog-date">Jan 5, 2025</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">DevOps</div>
+                        <h3 class="blog-title">Containerizing Python Applications</h3>
+                        <p class="blog-excerpt">
+                            Complete guide to containerizing Python applications with Docker, including 
+                            multi-stage builds, security best practices, and deployment strategies...
+                        </p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock"></i> 10 min read</span>
+                            <a href="#" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in" onclick="openBlogModal('blog4')">
+                    <div class="blog-image">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="blog-date">Dec 28, 2024</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">Security</div>
+                        <h3 class="blog-title">API Security Best Practices</h3>
+                        <p class="blog-excerpt">
+                            Essential security measures for protecting your APIs, including authentication, 
+                            rate limiting, input validation, and monitoring techniques...
+                        </p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock"></i> 15 min read</span>
+                            <a href="#" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in" onclick="openBlogModal('blog5')">
+                    <div class="blog-image">
+                        <i class="fas fa-brain"></i>
+                        <div class="blog-date">Dec 20, 2024</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">Machine Learning</div>
+                        <h3 class="blog-title">Integrating ML Models in Production</h3>
+                        <p class="blog-excerpt">
+                            How to successfully deploy machine learning models in production environments, 
+                            including model serving, monitoring, and continuous deployment strategies...
+                        </p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock"></i> 18 min read</span>
+                            <a href="#" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in" onclick="openBlogModal('blog6')">
+                    <div class="blog-image">
+                        <i class="fas fa-cogs"></i>
+                        <div class="blog-date">Dec 15, 2024</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-category">Architecture</div>
+                        <h3 class="blog-title">Microservices vs Monolith</h3>
+                        <p class="blog-excerpt">
+                            Comprehensive comparison of microservices and monolithic architectures, 
+                            including when to use each approach and migration strategies...
+                        </p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock"></i> 14 min read</span>
+                            <a href="#" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div class="blog-modal" id="blogModal">
+        <div class="blog-modal-content">
+            <div class="blog-modal-close" onclick="closeBlogModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="blog-modal-body">
+                <h2 class="blog-modal-title" id="blogModalTitle">Blog Post Title</h2>
+                <div class="blog-modal-text" id="blogModalBody">
+                    <!-- Blog content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience">
+        <div class="container">
+            <h2 class="section-title fade-in">Professional Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - Present</div>
+                        <h3 class="timeline-title">Senior Python Developer</h3>
+                        <p class="timeline-company">Tech Innovations Inc. • Remote</p>
+                        <p class="timeline-description">
+                            Leading backend development for enterprise applications serving 2M+ users. 
+                            Architected microservices infrastructure, implemented CI/CD pipelines, 
+                            and mentored junior developers. Reduced system latency by 40% and improved scalability 
+                            through advanced caching strategies and database optimization.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - 2022</div>
+                        <h3 class="timeline-title">Backend Developer</h3>
+                        <p class="timeline-company">StartupXYZ • San Francisco, CA</p>
+                        <p class="timeline-description">
+                            Developed and maintained RESTful APIs using Django and FastAPI serving 500K+ daily requests. 
+                            Implemented automated testing strategies achieving 95% code coverage and database optimization 
+                            techniques. Built real-time features using WebSocket connections and message queues.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019 - 2020</div>
+                        <h3 class="timeline-title">Python Developer</h3>
+                        <p class="timeline-company">WebDev Solutions • New York, NY</p>
+                        <p class="timeline-description">
+                            Built custom web applications and APIs for diverse clients across various industries. 
+                            Collaborated with frontend teams to deliver full-stack solutions and gained expertise 
+                            in cloud deployment using AWS and containerization technologies with Docker.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2019</div>
+                        <h3 class="timeline-title">Junior Software Engineer</h3>
+                        <p class="timeline-company">Code Academy • Boston, MA</p>
+                        <p class="timeline-description">
+                            Started my professional journey working on educational platform features serving 100K+ students. 
+                            Contributed to Python-based learning management systems and developed strong foundations 
+                            in software engineering best practices, testing, and agile methodologies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Let's Build Something Amazing Together</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info slide-in-left">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>john.smith@email.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>San Francisco, CA</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Availability</h3>
+                            <p>Available for freelance projects</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form slide-in-right" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Project Discussion" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Tell me about your project requirements..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- About Column -->
+                <div class="footer-column footer-about">
+                    <h3>Python Backend Developer</h3>
+                    <p class="subtitle">
+                        Müasir Python texnologiyaları və yüksək keyfiyyətli kodlaşdırma ilə backend həllər təqdim edirəm.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://github.com" class="social-link" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" class="social-link" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://twitter.com" class="social-link" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:info@example.com" class="social-link" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pages Column -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Səhifələr</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Ana Səhifə</a></li>
+                        <li><a href="#about">Haqqımda</a></li>
+                        <li><a href="#projects">Layihələr</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Əlaqə</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Column -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Xidmətlər</h4>
+                    <ul class="footer-links">
+                        <li><a href="#backend">Backend İnkişafı</a></li>
+                        <li><a href="#api">API İnkişafı</a></li>
+                        <li><a href="#database">Verilənlər Bazası</a></li>
+                        <li><a href="#cloud">Bulud Arxitekturası</a></li>
+                        <li><a href="#security">Təhlükəsizlik</a></li>
+                    </ul>
+                </div>
+
+                <!-- Technologies Column -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Texnologiyalar</h4>
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Django & Django REST</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Flask & FastAPI</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>PostgreSQL & MongoDB</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Docker & AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Portfolio. Bütün hüquqlar qorunur. Python və <span class="heart">❤</span> ilə hazırlanmışdır</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="{% static "assets/js/script.js" %}"></script>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Check for saved theme or prefer color scheme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme
+        if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+            document.body.classList.add('light-theme');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // Desktop theme toggle
+        themeToggle.addEventListener('click', () => {
+            toggleTheme();
+        });
+
+        // Mobile theme toggle
+        themeToggleMobile.addEventListener('click', () => {
+            toggleTheme();
+            // Close mobile menu after theme change
+            document.getElementById('mobileMenu').classList.remove('active');
+        });
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            
+            if (document.body.classList.contains('light-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Add this to your existing JavaScript
+        console.log('🎨 Gündüz/Gecə modu aktiv edildi!');
+    </script>
+</body>
+</html>
