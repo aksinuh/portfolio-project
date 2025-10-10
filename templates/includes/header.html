@@ -1,0 +1,108 @@
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="max-navbar" id="max-navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Aksinh.dev</a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Gündüz/Gecə Modu Butonu -->
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <a href="#contact" class="hire-btn">
+                    <i class="fas fa-handshake"></i> Hire Me
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="mobile-menu-item active">🏠 Home</a>
+        <a href="#about" class="mobile-menu-item">👨‍💻 About</a>
+        <a href="#projects" class="mobile-menu-item">🚀 Projects</a>
+        <a href="#blog" class="mobile-menu-item">📝 Blog</a>
+        <a href="#experience" class="mobile-menu-item">💼 Experience</a>
+        <a href="#contact" class="mobile-menu-item">📞 Contact</a>
+        
+        <!-- Mobile Theme Toggle -->
+        <button class="mobile-menu-item theme-toggle-mobile" id="themeToggleMobile">
+            🌙 Toggle Theme
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <div class="profile-placeholder">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+                
+                <!-- Animated Tech Icons Around Profile -->
+                <div class="tech-orbit">
+                    <div class="tech-icon" title="Python - Programming Language">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="tech-icon" title="Django - Web Framework">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="tech-icon" title="FastAPI - Modern API Framework">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="tech-icon" title="PostgreSQL - Database">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="tech-icon" title="Redis - In-Memory Database">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <div class="tech-icon" title="Docker - Containerization">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="tech-icon" title="AWS - Cloud Platform">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="tech-icon" title="MongoDB - NoSQL Database">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <h1>Akşin Nəzirov</h1>
+            <p class="subtitle">
+                <span class="typing-text" id="typingText">Python Backend Developer</span>
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="cta-button">
+                    <i class="fas fa-code"></i> View My Work
+                </a>
+                <a href="#contact" class="cta-button cta-secondary">
+                    <i class="fas fa-envelope"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
