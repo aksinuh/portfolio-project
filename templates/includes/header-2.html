@@ -1,0 +1,47 @@
+   <!-- Navigation -->
+    <nav class="max-navbar">
+        <div class="nav-container">
+            <a href="{% url "home" %}" class="logo">John.dev</a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li>
+                    <a href="{% url 'home' %}" 
+                    class="nav-link {% if active_page == 'home' %}active{% endif %}">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "home" %}#about" 
+                    class="nav-link {% if active_page == 'about' %}active{% endif %}">
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'projects' %}" 
+                    class="nav-link {% if active_page == 'projects' %}active{% endif %}">
+                        Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'blog' %}" 
+                    class="nav-link {% if active_page == 'blog' %}active{% endif %}">
+                        Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}" 
+                    class="nav-link {% if active_page == 'contact' %}active{% endif %}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <div class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    

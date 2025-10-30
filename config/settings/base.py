@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "apps.pages.home",
     "apps.pages.users",
+    "apps.pages.about",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'apps.pages.context_processors.active_page',
             ],
         },
     },
@@ -91,3 +93,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'users.User'

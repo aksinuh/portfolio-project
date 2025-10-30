@@ -14,15 +14,15 @@
 </head>
 <body>
 
-    {% include 'includes/header.html' %}
+    {% block header %}
+        {% include 'includes/header.html' %}
+    {% endblock header %}
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+    {% block content %}{% endblock content %}
 
     {% include 'includes/footer.html' %}
 
-    {% block scripts %}{% endblock %}
+    {% block scripts %}{% endblock scripts %}
     
 </body>
 </html>

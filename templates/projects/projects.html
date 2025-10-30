@@ -1,36 +1,19 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="az">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - John Smith</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'assets/css/project.css' %}">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="max-navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">John.dev</a>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html#home" class="nav-link">Home</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="projects.html" class="nav-link active">Projects</a></li>
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </div>
-            </div>
-        </div>
-    </nav>
 
+{% block title %}
+    <title>Projects - John Smith</title>
+{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'assets/css/project.css' %}">
+{% endblock styles %}
+
+{% block header %}
+    {% include 'includes/header-2.html' %}
+{% endblock header %}
+
+{% block content %}
     <!-- Projects Header -->
     <header class="projects-header">
         <h1>Projects</h1>
@@ -271,25 +254,8 @@
             </div>
         </div>
     </section>
+{% endblock content %}
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">John.dev</div>
-            <div class="footer-links">
-                <a href="index.html" class="footer-link">Home</a>
-                <a href="projects.html" class="footer-link">Projects</a>
-                <a href="blog.html" class="footer-link">Blog</a>
-                <a href="index.html#contact" class="footer-link">Contact</a>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
-    <script src="{% static 'assets/js/project.js' %}"></script>
-
-</body>
-</html>
+{% block scripts %}
+<script src="{% static 'assets/js/project.js' %}"></script>
+{% endblock scripts %}
