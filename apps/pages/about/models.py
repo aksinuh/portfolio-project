@@ -24,3 +24,15 @@ class Contact(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.subject}"
+
+
+class ContactInfo(models.Model):
+    phone = models.CharField(max_length=20, verbose_name="Telefon Nömrəsi")
+    email = models.EmailField(verbose_name="E-poçt")
+    address = models.TextField(verbose_name="Ünvan")
+    class Meta:
+        verbose_name = "Əlaqə Məlumatı"
+        verbose_name_plural = "Əlaqə Məlumatları"
+    
+    def __str__(self):
+        return f"Əlaqə Məlumatı - {self.email}" 

@@ -68,6 +68,20 @@
                 color: white;
             }
 
+            .light-theme .share-section {
+                background: rgba(255, 255, 255, 0.9);
+                border: 1px solid #00f2fe;
+                color: #030427;
+            }
+            
+            .light-theme .share-header {
+                color: #030427;
+            }
+
+            .light-theme .share-header i {
+                color: #000000ff;
+            }
+
             .light-theme .tag {
                 background: rgba(255, 255, 255, 0.9);
                 border: 2px solid #00f2fe;
@@ -166,3 +180,105 @@
         // Adjust on load and resize
         window.addEventListener('load', adjustFooter);
         window.addEventListener('resize', adjustFooter);
+
+        // Paylaşma funksiyaları
+        function getCurrentURL() {
+            return window.location.href;
+        }
+
+        function getPostTitle() {
+            return document.querySelector('.blog-detail-title')?.textContent || 'Maraqlı blog yazısı';
+        }
+
+        function getPostDescription() {
+            const excerpt = document.querySelector('.blog-excerpt')?.textContent;
+            return excerpt || 'Bu maraqlı blog yazısını oxuyun';
+        }
+
+        // Sosial media paylaşma
+        function shareOnFacebook() {
+            const url = encodeURIComponent(getCurrentURL());
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(getCurrentURL());
+            const title = encodeURIComponent(getPostTitle());
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(getCurrentURL());
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnWhatsApp() {
+            const url = encodeURIComponent(getCurrentURL());
+            const text = encodeURIComponent(getPostTitle());
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        }
+
+        function shareOnTelegram() {
+            const url = encodeURIComponent(getCurrentURL());
+            const text = encodeURIComponent(getPostTitle());
+            window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+        }
+
+        // Link kopyalama
+        function copyToClipboard() {
+            const url = getCurrentURL();
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showCopyNotification();
+                }).catch(() => {
+                    fallbackCopyToClipboard(url);
+                });
+            } else {
+                fallbackCopyToClipboard(url);
+            }
+        }
+
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopyNotification();
+            } catch (err) {
+                alert('Linki əl ilə kopyalayın: ' + text);
+            } finally {
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showCopyNotification() {
+            const notification = document.getElementById('copy-notification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        // Buton hover effektləri
+        document.addEventListener('DOMContentLoaded', function() {
+            const shareBtns = document.querySelectorAll('.share-btn');
+            
+            shareBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.1)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });

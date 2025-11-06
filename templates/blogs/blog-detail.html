@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Django nədir? - Blog Detail - John Smith</title>
+    <title>{{ post.title }} - Blog Detail - John Smith</title>
 {% endblock title %}
 
 {% block styles %}
@@ -18,130 +18,98 @@
     <div class="blog-detail-container">
         <main class="blog-detail">
             <header class="blog-detail-header">
-                <h1 class="blog-detail-title">Django nədir?</h1>
+                <h1 class="blog-detail-title">{{ post.title }}</h1>
                 <div class="blog-detail-meta">
                     <div class="meta-item">
                         <i class="far fa-calendar"></i>
-                        <span>25 İyul 2025</span>
+                        <span>{{ post.published_date|date:"d F Y" }}</span>
                     </div>
                     <div class="meta-item">
                         <i class="far fa-clock"></i>
-                        <span>5 dəq oxuma müddəti</span>
+                        <span>{{ post.reading_time }} dəq oxuma müddəti</span>
                     </div>
                     <div class="meta-item">
                         <i class="far fa-folder"></i>
-                        <span>Backend Development</span>
+                        <span>{{ post.post_type }}</span>
                     </div>
                 </div>
                 
                 <div class="blog-tags">
-                    <span class="tag">Django</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Backend</span>
-                    <span class="tag">Web Framework</span>
-                    <span class="tag">MVC</span>
+                    {% for tag in post.tags.all %}
+                    <span class="tag">{{ tag.name }}</span>
+                    {% endfor %}
                 </div>
             </header>
 
             <article class="blog-detail-content">
                 <!-- Table of Contents -->
+                {% if toc_headings %}
                 <div class="toc">
                     <h3 class="toc-title"><i class="fas fa-list"></i> Məzmun</h3>
                     <ul class="toc-list">
-                        <li class="toc-item"><a href="#intro" class="toc-link">Giriş</a></li>
-                        <li class="toc-item"><a href="#what-is-django" class="toc-link">Django nədir?</a></li>
-                        <li class="toc-item"><a href="#features" class="toc-link">Əsas Xüsusiyyətlər</a></li>
-                        <li class="toc-item"><a href="#architecture" class="toc-link">Arxitektura</a></li>
-                        <li class="toc-item"><a href="#advantages" class="toc-link">Üstünlüklər</a></li>
-                        <li class="toc-item"><a href="#conclusion" class="toc-link">Nəticə</a></li>
+                        {% for heading in toc_headings %}
+                        <li class="toc-item">
+                            <a href="#{{ heading.id }}" class="toc-link">{{ heading.text }}</a>
+                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
 
-                <h2 id="intro">Giriş</h2>
-                <p>Django, Python dilində yazılmış yüksək səviyyəli bir web framework-dür. Sürətli inkişaf və təmiz, pragmatik dizaynı təşviq edir. Django, təcrübəli developerlərin qısa müddətdə mürəkkəb, database-driven veb saytlar yaratmasına kömək etmək üçün hazırlanmışdır.</p>
-
-                <h2 id="what-is-django">Django nədir?</h2>
-                <p>Django, Python proqramlaşdırma dilində yazılmış açıq mənbəli bir web framework-dür. Framework, developerlərə ümumi funksionallığı yenidən yazmaq əvəzinə proqramların digər aspektlərinə diqqət yetirməyə imkan verərək, veb proqramların yaradılmasını asanlaşdırır.</p>
-
-                <p>Django "framework for perfectionists with deadlines" (müddəti olan perfeksionistlər üçün framework) kimi təqdim olunur. Bu, developerlərə yüksək keyfiyyətli veb proqramları çox sürətli şəkildə yaratmağa kömək etmək məqsədi daşıyır.</p>
-
-                <h2 id="features">Əsas Xüsusiyyətlər</h2>
-                <h3>Object-Relational Mapping (ORM)</h3>
-                <p>Django ORM, developerlərə verilənlər bazası cədvəlləri ilə işləmək üçün Python siniflərindən istifadə etməyə imkan verir. Bu, SQL bilmədən mürəkkəb verilənlər bazası əməliyyatlarını yerinə yetirməyə imkan yaradır.</p>
-
-                <pre><code># Django ORM nümunəsi
-from django.db import models
-
-class Blog(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    published_date = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return self.title</code></pre>
-
-                <h3>Admin Interface</h3>
-                <p>Django, modelləriniz üçün avtomatik olaraq professional və istehsal üçün hazır admin interfeysi yaradır. Bu, developerlərə məzmunu idarə etmək üçün gözəl bir interfeys təmin edir.</p>
-
-                <h3>URL Routing</h3>
-                <p>Django, təmiz və zərif URL-ləri dəstəkləyir. Bu, axtarış motorları üçün SEO-dostu URL-lər yaratmağa və istifadəçilər üçün yadda qalan ünvanlar təmin etməyə kömək edir.</p>
-
-                <h3>Template System</h3>
-                <p>Django-nun template sistemi, məntiq və təqdimatın ayrılmasını təmin edir. Bu, designer və developerlərin eyni vaxtda işləməsinə imkan verir.</p>
-
-                <h2 id="architecture">Arxitektura</h2>
-                <p>Django, Model-View-Template (MVT) arxitekturasını izləyir:</p>
-
-                <ul>
-                    <li><strong>Model:</strong> Verilənlər bazasının strukturunu təyin edir</li>
-                    <li><strong>View:</strong> İstəkləri emal edir və cavabları qaytarır</li>
-                    <li><strong>Template:</strong> İstifadəçi interfeysinin necə göstəriləcəyini təyin edir</li>
-                </ul>
-
-                <blockquote>
-                    <p>Django-nun MVT arxitekturası, ənənəvi MVC modelinə bənzəyir, lakin Django-da Controller rolunu frameworkun özü yerinə yetirir.</p>
-                </blockquote>
-
-                <h2 id="advantages">Üstünlüklər</h2>
-                <h3>Sürətli İnkişaf</h3>
-                <p>Django, "battery-included" fəlsəfəsi ilə işləyir, yəni developerlərə ehtiyac duyduqları demək olar ki, hər şeyi təmin edir. Bu, inkişaf prosesini əhəmiyyətli dərəcədə sürətləndirir.</p>
-
-                <h3>Təhlükəsizlik</h3>
-                <p>Django, developerləri ümumi təhlükəsizlik səhvlərindən qorumaq üçün bir çox təhlükəsizlik xüsusiyyətləri təqdim edir. Buraya SQL injection, cross-site scripting, cross-site request forgery və clickjacking qorunması daxildir.</p>
-
-                <h3>Ölçəklənəbilərlik</h3>
-                <p>Django, ən çox trafik alan saytlardan biri olan Instagram kimi böyük miqyaslı tətbiqləri dəstəkləmək üçün hazırlanmışdır.</p>
-
-                <h3>Çox yönlülük</h3>
-                <p>Django, müxtəlif növ veb tətbiqləri yaratmaq üçün istifadə edilə bilər - məzmun idarəetmə sistemlərindən sosial şəbəkələrə qədər, elmi hesablama platformalarından idarəetmə sistemlərinə qədər.</p>
-
-                <h2 id="conclusion">Nəticə</h2>
-                <p>Django, Python developerləri üçün güclü və çox yönlü bir web framework-dür. Onun "battery-included" yanaşması, möhkəm təhlükəsizlik xüsusiyyətləri və miqyaslanma qabiliyyəti, onu müasir veb tətbiqləri üçün əla seçim edir.</p>
-
-                <p>İstər kiçik bir şəxsi layihə, istərsə də böyük bir korporativ tətbiq üzərində işləyirsinizsə, Django sizə təmiz kod yazmaq və layihənizi vaxtında çatdırmaq üçün lazım olan alətləri təmin edəcəkdir.</p>
+                <!-- Dinamik Məzmun -->
+                {{ post.content|safe }}
             </article>
 
             <div class="blog-actions">
-                <a href="blog.html" class="back-to-blog">
+                <a href="{% url 'blog' %}" class="back-to-blog">
                     <i class="fas fa-arrow-left"></i>
                     Blog səhifəsinə qayıt
                 </a>
                 
-                <div class="social-share">
-                    <div class="share-btn facebook">
-                        <i class="fab fa-facebook-f"></i>
+                <div class="share-section">
+                        <div class="share-header">
+                            <i class="fas fa-share-alt"></i>
+                            <span class="share-title">Paylaş:</span>
+                        </div>
+                        
+                        <div class="share-buttons">
+                            <!-- Sosial media butonları -->
+                            <button class="share-btn fb" onclick="shareOnFacebook()" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            
+                            <button class="share-btn tw" onclick="shareOnTwitter()" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            
+                            <button class="share-btn in" onclick="shareOnLinkedIn()" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                            
+                            <button class="share-btn wa" onclick="shareOnWhatsApp()" title="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+
+                            </button>
+                            
+                            <button class="share-btn tg" onclick="shareOnTelegram()" title="Telegram">
+                                <i class="fab fa-telegram-plane"></i>
+                            </button>
+                            
+                            <button class="share-btn copy" onclick="copyToClipboard()" title="Linki Kopyala">
+                                <i class="fas fa-link"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="share-btn twitter">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="share-btn linkedin">
-                        <i class="fab fa-linkedin-in"></i>
-                    </div>
+                </div>
+                
+                <!-- Kopyalama bildirişi -->
+                <div id="copy-notification" class="copy-notification">
+                    <i class="fas fa-check"></i>
+                    <span>Link kopyalandı!</span>
                 </div>
             </div>
         </main>
     </div>
-
 {% endblock content %}
 
 {% block scripts %}

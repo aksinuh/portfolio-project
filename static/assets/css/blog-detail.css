@@ -1038,7 +1038,7 @@
             }
             
             .blog-tags {
-                justify-content: flex-start;
+                justify-content: center;
             }
         }
         .scroll-to-top {
@@ -1101,4 +1101,280 @@
         /* Content min-height to push footer down */
         .blog-detail-container {
             min-height: calc(100vh - 200px);
+        }
+        /* Paylaşma bölməsi üçün CSS */
+        /* Blog Actions - Daha səliqəli və ayrılmış */
+        .blog-actions {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #00f2fe;
+        }
+
+        .actions-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            max-width: 100%;
+        }
+
+        /* Geri dönmə bölməsi - Sol tərəf */
+        .back-section {
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+        }
+
+        .back-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Paylaşma bölməsi - Sağ tərəf */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 242, 254, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid #00f2fe;
+        }
+
+        .share-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #00f2fe;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .share-header i {
+            color: #00f2fe;
+            font-size: 1rem;
+        }
+
+        /* Paylaşma butonları - Kompakt və sıx */
+        .share-buttons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .share-btn::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #374151;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .share-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Sosial media rəngləri */
+        .share-btn.fb { 
+            background: #1877f2; 
+        }
+        .share-btn.fb:hover { 
+            background: #166fe5; 
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4); 
+        }
+
+        .share-btn.tw { 
+            background: #1da1f2; 
+        }
+        .share-btn.tw:hover { 
+            background: #1a91da; 
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4); 
+        }
+
+        .share-btn.in { 
+            background: #0077b5; 
+        }
+        .share-btn.in:hover { 
+            background: #00669c; 
+            box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4); 
+        }
+
+        .share-btn.wa { 
+            background: #25d366; 
+        }
+        .share-btn.wa:hover { 
+            background: #20bd5c; 
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); 
+        }
+
+        .share-btn.tg { 
+            background: #0088cc; 
+        }
+        .share-btn.tg:hover { 
+            background: #0077b3; 
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.4); 
+        }
+
+        .share-btn.copy { 
+            background: #6b7280; 
+        }
+        .share-btn.copy:hover { 
+            background: #4b5563; 
+            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4); 
+        }
+
+        /* Kopyalama bildirişi */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+            z-index: 9999; /* ← Daha yüksək z-index */
+            font-size: 0.9rem;
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .copy-notification i {
+            font-size: 0.9rem;
+        }
+
+        /* Gecə/gündüz düyməsi üçün aşağı z-index */
+        .theme-toggle, .dark-mode-toggle, [class*="theme"] {
+            z-index: 100; /* ← Daha aşağı z-index */
+        }
+
+        /* Mobil uyğunluq */
+        @media (max-width: 768px) {
+            .actions-container {
+                flex-direction: column;
+                gap: 20px;
+                align-items: stretch;
+            }
+            
+            .back-section {
+                order: 1;
+            }
+            
+            .share-section {
+                order: 2;
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .share-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .share-btn {
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .share-section {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            
+            .share-buttons {
+                gap: 6px;
+            }
+            
+            .share-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 0.9rem;
+            }
+            
+            .share-header {
+                justify-content: center;
+            }
+        }
+
+        /* Kiçik ekranlar üçün optimallaşdırma */
+        @media (max-width: 360px) {
+            .share-buttons {
+                gap: 4px;
+            }
+            
+            .share-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 0.85rem;
+            }
+            
+            .share-section {
+                padding: 10px 15px;
+            }
         }

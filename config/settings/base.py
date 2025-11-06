@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     "apps.pages.home",
     "apps.pages.users",
     "apps.pages.about",
+    "apps.pages.project",
+    "apps.pages.blog",
 ]
 
 MIDDLEWARE = [
@@ -73,10 +75,25 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
-USE_I18N = True
-USE_TZ = True
+from django.utils.translation import gettext_lazy as _
+
+# Dil və zaman konfiqurasiyası
+LANGUAGE_CODE = 'az'  # ✅ Azərbaycan dili
+TIME_ZONE = 'Asia/Baku'  # ✅ Bakı zaman zonası
+USE_I18N = True  # ✅ Beynəlxalqlaşdırma aktiv
+USE_L10N = True  # ✅ Lokallaşdırma aktiv
+USE_TZ = True  # ✅ Zaman zonası aktiv
+
+# Dillər siyahısı
+LANGUAGES = [
+    ('az', _('Azərbaycan')),
+    ('en', _('İngilis')),
+]
+
+# Lokal fayllar yolu
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 
 # Static files konfiqurasiyası

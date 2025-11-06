@@ -953,7 +953,7 @@
                 position: fixed;
                 top: 80px;
                 right: -100%;
-                background: rgba(12, 12, 12, 0.95);
+                background: linear-gradient(354deg, #0c2f3f 0%, #030427 100%);
                 backdrop-filter: blur(20px);
                 border: 1px solid var(--glass-border);
                 border-radius: 20px;

@@ -22,16 +22,23 @@
     <section class="filter-section">
         <div class="container">
             <div class="filter-container">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="🔍 Axtar...">
-                </div>
+                <form method="get" class="search-box neon-search">
+                    <input type="text" name="q" placeholder="🔍 Axtar..." value="{{ search_query }}">
+                    <button type="submit" class="fa fa-search search-btn"></button>
+                </form>
+                
                 <div class="filter-tags">
-                    <button class="filter-tag active" data-category="all">Hamısı</button>
-                    <button class="filter-tag" data-category="backend">Backend</button>
-                    <button class="filter-tag" data-category="django">Django</button>
-                    <button class="filter-tag" data-category="python">Python</button>
-                    <button class="filter-tag" data-category="frontend">Frontend</button>
-                    <button class="filter-tag" data-category="typescript">TypeScript</button>
+                    <a href="?category=all{% if search_query %}&q={{search_query}}{% endif %}"
+                    class="filter-tag {% if selected_category == 'all' %}active{% endif %}">
+                    Hamısı
+                    </a>
+
+                    {% for cat in categories %}
+                    <a href="?category={{ cat.slug }}{% if search_query %}&q={{search_query}}{% endif %}"
+                    class="filter-tag {% if selected_category == cat.slug %}active{% endif %}">
+                    {{ cat.name }}
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -42,172 +49,41 @@
         <div class="container">
             <div class="blog-grid" id="blogGrid">
                 <!-- Blog Card 1 -->
-                <article class="blog-card" data-category="django backend">
+                {% for post in posts %}
+                <article class="blog-card" data-category="{{ post.category.slug }} {{ post.post_type|lower }}">
                     <div class="blog-image">
-                        <i class="fab fa-python"></i>
-                        <span class="blog-date">25 İyul 2025</span>
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="post_image">
+                        {% else %}
+                            <i class="{{ post.icon.svg_code }}"></i>
+                        {% endif %}
+                        <span class="blog-date">{{ post.published_date|date:"d F Y" }}</span>
                     </div>
                     <div class="blog-content">
-                        <span class="blog-category">Backend</span>
-                        <h3 class="blog-title">Django nədir?</h3>
-                        <p class="blog-excerpt">Django Python dilində yazılmış güclü və populyar web framework-dür. Bu məqalədə Django-nun əsas xüsusiyyətləri və üstünlükləri haqqında ətraflı məlumat...</p>
+                        <span class="blog-category">{{ post.category.name }}</span>
+                        <h3 class="blog-title">{{ post.title }}</h3>
+                        <p class="blog-excerpt">{{ post.excerpt }}</p>
                         <div class="blog-tags">
-                            <span class="tag">Django</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Backend</span>
+                            {% for tag in post.tags.all %}
+                                <span class="tag">{{ tag.name }}</span>
+                            {% endfor %}
                         </div>
                         <div class="blog-meta">
                             <span class="read-time">
                                 <i class="far fa-clock"></i>
-                                5 dəq
+                                {{ post.reading_time }} dəq
                             </span>
-                            <a href="blog-detail.html?id=1" class="read-more">
+                            <a href="{{ post.get_absolute_url }}" class="read-more">
                                 Daha ətraflı
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </article>
+                {% endfor %}
 
                 <!-- Blog Card 2 -->
-                <article class="blog-card" data-category="frontend typescript">
-                    <div class="blog-image">
-                        <i class="fab fa-node-js"></i>
-                        <span class="blog-date">23 İyul 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <span class="blog-category">Frontend</span>
-                        <h3 class="blog-title">Next.js Nədir?</h3>
-                        <p class="blog-excerpt">Next.js React əsaslı müasir web framework-dür. Server-side rendering və static site generation imkanları ilə performans və SEO üçün idealdır...</p>
-                        <div class="blog-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">React</span>
-                            <span class="tag">TypeScript</span>
-                        </div>
-                        <div class="blog-meta">
-                            <span class="read-time">
-                                <i class="far fa-clock"></i>
-                                7 dəq
-                            </span>
-                            <a href="blog-detail.html?id=2" class="read-more">
-                                Daha ətraflı
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 3 -->
-                <article class="blog-card" data-category="frontend">
-                    <div class="blog-image">
-                        <i class="fab fa-html5"></i>
-                        <span class="blog-date">25 İyul 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <span class="blog-category">Frontend</span>
-                        <h3 class="blog-title">HTML nə üçündür?</h3>
-                        <p class="blog-excerpt">HTML (HyperText Markup Language) web səhifələrin strukturunu təşkil edən əsas dildir. Hər bir web developer-in bilməli olduğu fundamental texnologiya...</p>
-                        <div class="blog-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">Frontend</span>
-                            <span class="tag">Web</span>
-                        </div>
-                        <div class="blog-meta">
-                            <span class="read-time">
-                                <i class="far fa-clock"></i>
-                                4 dəq
-                            </span>
-                            <a href="blog-detail.html?id=3" class="read-more">
-                                Daha ətraflı
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 4 -->
-                <article class="blog-card" data-category="backend python">
-                    <div class="blog-image">
-                        <i class="fas fa-server"></i>
-                        <span class="blog-date">20 İyul 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <span class="blog-category">Backend</span>
-                        <h3 class="blog-title">API Development with FastAPI</h3>
-                        <p class="blog-excerpt">FastAPI Python-da ən sürətli və müasir API framework-lərindən biridir. Async dəstəyi və avtomatik documentation xüsusiyyətləri ilə seçilir...</p>
-                        <div class="blog-tags">
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">API</span>
-                        </div>
-                        <div class="blog-meta">
-                            <span class="read-time">
-                                <i class="far fa-clock"></i>
-                                8 dəq
-                            </span>
-                            <a href="blog-detail.html?id=4" class="read-more">
-                                Daha ətraflı
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 5 -->
-                <article class="blog-card" data-category="backend django">
-                    <div class="blog-image">
-                        <i class="fas fa-database"></i>
-                        <span class="blog-date">18 İyul 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <span class="blog-category">Backend</span>
-                        <h3 class="blog-title">PostgreSQL Performance Tips</h3>
-                        <p class="blog-excerpt">PostgreSQL performansını artırmaq üçün tövsiyələr və best practice-lər. İndeksləmə, query optimization və database tuning strategiyaları...</p>
-                        <div class="blog-tags">
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">Database</span>
-                            <span class="tag">Performance</span>
-                        </div>
-                        <div class="blog-meta">
-                            <span class="read-time">
-                                <i class="far fa-clock"></i>
-                                10 dəq
-                            </span>
-                            <a href="blog-detail.html?id=5" class="read-more">
-                                Daha ətraflı
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Blog Card 6 -->
-                <article class="blog-card" data-category="frontend typescript">
-                    <div class="blog-image">
-                        <i class="fab fa-react"></i>
-                        <span class="blog-date">15 İyul 2025</span>
-                    </div>
-                    <div class="blog-content">
-                        <span class="blog-category">Frontend</span>
-                        <h3 class="blog-title">React Hooks Comprehensive Guide</h3>
-                        <p class="blog-excerpt">React Hooks funksional komponentlərdə state və lifecycle management üçün güclü vasitədir. useState, useEffect və digər hook-lar haqqında...</p>
-                        <div class="blog-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Hooks</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <div class="blog-meta">
-                            <span class="read-time">
-                                <i class="far fa-clock"></i>
-                                12 dəq
-                            </span>
-                            <a href="blog-detail.html?id=6" class="read-more">
-                                Daha ətraflı
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+               
             </div>
         </div>
     </section>

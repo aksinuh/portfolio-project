@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 
-from .models import Contact
+from .models import Contact, ContactInfo
 
 
 @admin.register(Contact)
@@ -102,3 +102,13 @@ class ContactAdmin(admin.ModelAdmin):
         except:
             return "URL tapılmadı"
     quick_actions.short_description = 'ƏMƏLİYYAT'
+    
+
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    list_display = ['phone', 'email', 'address_short']
+    search_fields = ['phone', 'email', 'address']
+    
+    def address_short(self, obj):
+        return obj.address[:50] + ('...' if len(obj.address) > 50 else '')
+    address_short.short_description = 'ÜNVAN'

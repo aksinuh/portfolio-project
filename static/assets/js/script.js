@@ -1,4 +1,3 @@
-// Blog data for modal content
 const blogPosts = {
     blog1: {
         title: "Building Scalable APIs with FastAPI",
