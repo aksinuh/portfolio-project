@@ -2,9 +2,12 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from django import forms
+from modeltranslation.admin import TranslationAdmin
+
 from .models import (
-    HomePage, TypingText, SocialLink, Icons, 
-    About, CodeDeveloper, SkillsCategory, Skill, Experience
+    HomePage, TypingText, SocialLink,
+    Icons, About, CodeDeveloper,
+    SkillsCategory, Skill, Experience
 )
 
 
@@ -62,10 +65,7 @@ class CodeDeveloperForm(forms.ModelForm):
         model = CodeDeveloper
         fields = '__all__'
         widgets = {
-            'skills': forms.Textarea(attrs={'rows': 3}),
-            'experience': forms.Textarea(attrs={'rows': 3}),
-            'passion': forms.Textarea(attrs={'rows': 3}),
-            'about': forms.Textarea(attrs={'rows': 4}),
+            'content': forms.Textarea(attrs={'rows': 6, 'cols': 80}),
         }
 
 
@@ -280,7 +280,7 @@ class IconsAdmin(admin.ModelAdmin):
 
 
 @admin.register(About)
-class AboutAdmin(admin.ModelAdmin):
+class AboutAdmin(TranslationAdmin):
     form = AboutForm
     list_display = [
         'content_preview',
@@ -324,39 +324,26 @@ class AboutAdmin(admin.ModelAdmin):
     
     def has_add_permission(self, request):
         return not About.objects.exists()
+    
+    class Media:
+        js = (
+                'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+                'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+                'modeltranslation/js/tabbed_translation_fields.js',
+            )
+        css = {
+                'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+            }
 
 
 @admin.register(CodeDeveloper)
 class CodeDeveloperAdmin(admin.ModelAdmin):
     form = CodeDeveloperForm
     list_display = [
-        'name',
-        'skills_preview',
-        'experience_preview',
+        'content',
         'admin_actions'
     ]
-    search_fields = ['name', 'skills', 'experience']
-    
-    fieldsets = (
-        ('ƏSAS MƏLUMATLAR', {
-            'fields': ('name', 'about'),
-            'description': 'Əsas məlumatlar'
-        }),
-        ('BACARIQLAR Və TƏCRÜBƏ', {
-            'fields': ('skills', 'experience', 'passion'),
-            'description': 'Texniki bacarıqlar və təcrübə'
-        }),
-    )
-    
-    def skills_preview(self, obj):
-        preview = obj.skills[:80] + '...' if len(obj.skills) > 80 else obj.skills
-        return format_html('<div>{}</div>', preview)
-    skills_preview.short_description = 'BACARIQLAR'
-    
-    def experience_preview(self, obj):
-        preview = obj.experience[:80] + '...' if len(obj.experience) > 80 else obj.experience
-        return format_html('<div>{}</div>', preview)
-    experience_preview.short_description = 'TƏCRÜBƏ'
+    search_fields = ['content']
     
     def admin_actions(self, obj):
         app_label = obj._meta.app_label
@@ -405,7 +392,7 @@ class SkillsCategoryAdmin(admin.ModelAdmin):
     icon_preview.short_description = 'İCON'
     
     def skills_count(self, obj):
-        return obj.skill_set.count()
+        return obj.skills.count()
     skills_count.short_description = 'BACARIQ SAYI'
     
     def admin_actions(self, obj):
@@ -459,7 +446,7 @@ class SkillAdmin(admin.ModelAdmin):
 
 
 @admin.register(Experience)
-class ExperienceAdmin(admin.ModelAdmin):
+class ExperienceAdmin(TranslationAdmin):
     list_display = [
         'job_title',
         'company_name',
@@ -509,6 +496,17 @@ class ExperienceAdmin(admin.ModelAdmin):
             change_url, delete_url
         )
     admin_actions.short_description = 'ƏMƏLİYYATLAR'
+    
+    
+    class Media:
+        js = (
+                'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+                'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+                'modeltranslation/js/tabbed_translation_fields.js',
+            )
+        css = {
+                'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+            }
 
 
 # Admin site konfiqurasiyası

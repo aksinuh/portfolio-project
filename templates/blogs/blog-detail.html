@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+
 
 {% block title %}
-    <title>{{ post.title }} - Blog Detail - John Smith</title>
+    <title>{{ post.title }} - {% trans "Blog Detail" %} - Aksin Nezirov</title>
 {% endblock title %}
 
 {% block styles %}
@@ -26,7 +28,7 @@
                     </div>
                     <div class="meta-item">
                         <i class="far fa-clock"></i>
-                        <span>{{ post.reading_time }} dəq oxuma müddəti</span>
+                        <span>{{ post.reading_time }} {% trans "min read" %}</span>
                     </div>
                     <div class="meta-item">
                         <i class="far fa-folder"></i>
@@ -45,7 +47,7 @@
                 <!-- Table of Contents -->
                 {% if toc_headings %}
                 <div class="toc">
-                    <h3 class="toc-title"><i class="fas fa-list"></i> Məzmun</h3>
+                    <h3 class="toc-title"><i class="fas fa-list"></i> {% trans "Table of Contents" %}</h3>
                     <ul class="toc-list">
                         {% for heading in toc_headings %}
                         <li class="toc-item">
@@ -63,13 +65,13 @@
             <div class="blog-actions">
                 <a href="{% url 'blog' %}" class="back-to-blog">
                     <i class="fas fa-arrow-left"></i>
-                    Blog səhifəsinə qayıt
+                   {% trans "Back to Blog" %}
                 </a>
                 
                 <div class="share-section">
                         <div class="share-header">
                             <i class="fas fa-share-alt"></i>
-                            <span class="share-title">Paylaş:</span>
+                            <span class="share-title">{% trans "Share:" %}</span>
                         </div>
                         
                         <div class="share-buttons">
@@ -105,7 +107,7 @@
                 <!-- Kopyalama bildirişi -->
                 <div id="copy-notification" class="copy-notification">
                     <i class="fas fa-check"></i>
-                    <span>Link kopyalandı!</span>
+                    <span>{% trans "Link copied!" %}</span>
                 </div>
             </div>
         </main>

@@ -55,7 +55,7 @@ class BlogPost(models.Model):
     icon = models.ForeignKey(Icons, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="İcon")
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True, verbose_name="Blog şəkli")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Kateqoriya")
-    post_type = models.CharField(max_length=50, choices=POST_TYPES, verbose_name="Post Tipi")
+    post_type = models.CharField(max_length=50, choices=POST_TYPES, null=True, blank=True, verbose_name="Post Tipi")
     tags = models.ManyToManyField(Tag, blank=True, verbose_name="Teqlər")
     published_date = models.DateTimeField(default=timezone.now, verbose_name="Nəşr tarixi")
     reading_time = models.PositiveIntegerField(default=5, verbose_name="Oxuma müddəti (dəq)")

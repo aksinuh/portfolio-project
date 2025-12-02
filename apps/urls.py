@@ -3,9 +3,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('', include("apps.pages.home.urls")),
     path('', include("apps.pages.blog.urls")),
+    path('', include("apps.pages.project.urls")),
+    path('', include("apps.pages.about.urls")),
     
 ]
 

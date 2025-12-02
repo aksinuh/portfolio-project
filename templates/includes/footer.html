@@ -1,3 +1,4 @@
+    {% load i18n %}
     <!-- Footer -->
     <footer class="footer" id="footer">
         <div class="footer-container">
@@ -6,51 +7,44 @@
                 <div class="footer-column footer-about">
                     <h3>Python Backend Developer</h3>
                     <p class="subtitle">
-                        Müasir Python texnologiyaları və yüksək keyfiyyətli kodlaşdırma ilə backend həllər təqdim edirəm.
+                        {% trans "I provide backend solutions with modern Python technologies and high-quality coding." %}
                     </p>
                     <div class="social-links">
-                        <a href="https://github.com" class="social-link" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
+                        {% for social in footer_social_links %}
+                        <a href="{{ social.url }}" class="social-link" target="_blank" title="{{ social.name }}">
+                            <i class="{{ social.icon.svg_code }}"></i>
                         </a>
-                        <a href="https://linkedin.com" class="social-link" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://twitter.com" class="social-link" target="_blank" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="mailto:info@example.com" class="social-link" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                        {% endfor %}
                     </div>
                 </div>
-
+                
                 <!-- Pages Column -->
                 <div class="footer-column">
-                    <h4 class="footer-title">Səhifələr</h4>
+                    <h4 class="footer-title">{% trans "Pages" %}</h4>
                     <ul class="footer-links">
-                        <li><a href="#home">Ana Səhifə</a></li>
-                        <li><a href="#about">Haqqımda</a></li>
-                        <li><a href="#projects">Layihələr</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#contact">Əlaqə</a></li>
+                        <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'home' %}#about">{% trans "About Me" %}</a></li>
+                        <li><a href="{% url 'projects' %}">{% trans "Projects" %}</a></li>
+                        <li><a href="{% url 'blog' %}#blog">{% trans "Blog" %}</a></li>
+                        <li><a href="{% url 'contact' %}#contact">{% trans "Contact" %}</a></li>
                     </ul>
                 </div>
 
                 <!-- Services Column -->
                 <div class="footer-column">
-                    <h4 class="footer-title">Xidmətlər</h4>
+                    <h4 class="footer-title">{% trans "Services" %}</h4>
                     <ul class="footer-links">
-                        <li><a href="#backend">Backend İnkişafı</a></li>
-                        <li><a href="#api">API İnkişafı</a></li>
-                        <li><a href="#database">Verilənlər Bazası</a></li>
-                        <li><a href="#cloud">Bulud Arxitekturası</a></li>
-                        <li><a href="#security">Təhlükəsizlik</a></li>
+                        <li><a href="#backend">{% trans "Backend Development" %}</a></li>
+                        <li><a href="#api">{% trans "API Development" %}</a></li>
+                        <li><a href="#database">{% trans "Database" %}</a></li>
+                        <li><a href="#cloud">{% trans "Cloud Architecture" %}</a></li>
+                        <li><a href="#security">{% trans "Security" %}</a></li>
                     </ul>
                 </div>
 
                 <!-- Technologies Column -->
                 <div class="footer-column">
-                    <h4 class="footer-title">Texnologiyalar</h4>
+                    <h4 class="footer-title">{% trans "Technologies" %}</h4>
                     <div class="tech-list">
                         <div class="tech-item">
                             <i class="fas fa-check-circle"></i>

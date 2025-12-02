@@ -25,7 +25,7 @@ class ContactAdmin(admin.ModelAdmin):
     # Fieldsets
     fieldsets = (
         ('MESAJ MƏLUMATLARI', {
-            'fields': ('name', 'email', 'subject', 'message')
+            'fields': ('name', 'email', 'subject', 'message', 'project_type')
         }),
         ('STATUS Və META', {
             'fields': ('status', 'ip_address', 'created_at')

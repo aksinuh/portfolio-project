@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-    <title>Aksinh.dev - Python Backend Developer</title>
+    <title>Akşin Nəzirov - Python Backend Developer</title>
 {% endblock %}
 
 {% block styles %}
@@ -14,327 +15,90 @@
     <!-- About Section -->
     <section id="about" class="section about">
         <div class="container">
-            <h2 class="section-title fade-in">About Me</h2>
-            
+            <h2 class="section-title fade-in">{% trans "About Me" %}</h2>
+            {% if about %}
             <div class="about-content">
                 <div class="slide-in-left">
-                    <p class="about-text">
-                        I'm a passionate <strong>Python Backend Developer</strong> with 5+ years of experience crafting 
-                        robust, scalable web applications and APIs. I specialize in modern Python frameworks, 
-                        cloud technologies, and microservices architecture that power exceptional digital experiences.
-                    </p>
-                    <p class="about-text">
-                        My expertise lies in building high-performance backend systems that handle millions 
-                        of requests while maintaining optimal speed, reliability, and security. I believe in 
-                        writing clean, maintainable code and following industry best practices.
-                    </p>
+                    {{ about.content|safe }}
 
                     <div class="stats-grid">
                         <div class="stat-item fade-in">
-                            <span class="stat-number" data-count="150">0</span>
-                            <div class="stat-label">Projects Completed</div>
+                            <span class="stat-number" data-count="{{about.projects_count}}">0</span>
+                            <div class="stat-label">{% trans "Projects Completed" %}</div>
                         </div>
                         <div class="stat-item fade-in">
-                            <span class="stat-number" data-count="5">0</span>
-                            <div class="stat-label">Years Experience</div>
+                            <span class="stat-number" data-count="{{about.years_experience}}">0</span>
+                            <div class="stat-label">{% trans "Years Experience" %}</div>
                         </div>
                         <div class="stat-item fade-in">
-                            <span class="stat-number" data-count="200">0</span>
-                            <div class="stat-label">Happy Clients</div>
+                            <span class="stat-number" data-count="{{about.clients_count}}">0</span>
+                            <div class="stat-label">{% trans "Happy Clients" %}</div>
                         </div>
                         <div class="stat-item fade-in">
                             <span class="stat-number" data-count="99">0</span>
-                            <div class="stat-label">Success Rate %</div>
+                            <div class="stat-label">{% trans "Success Rate" %} %</div>
                         </div>
                     </div>
                 </div>
-
+                {% endif %}
+                
+                {% if code_developer %}
                 <div class="about-visual slide-in-right">
-                    <div class="code-window">
-                        <div class="code-header">
-                            <div class="code-dot red"></div>
-                            <div class="code-dot yellow"></div>
-                            <div class="code-dot green"></div>
-                            <span class="code-filename">developer.py</span>
-                        </div>
-                        <div class="code-content">
-                            <div class="code-line">
-                                <span class="line-number">1</span>
-                                <span class="code-keyword">class </span> <span class="code-function"> PythonDeveloper</span>:
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">2</span>
-                                <span style="margin-left: 20px;"><span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):</span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">3</span>
-                                <span style="margin-left: 40px;">self.name = <span class="code-string">"John Smith"</span></span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">4</span>
-                                <span style="margin-left: 40px;">self.skills = [<span class="code-string">"Python"</span>, <span class="code-string">"Django"</span>]</span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">5</span>
-                                <span style="margin-left: 40px;">self.passion = <span class="code-string">"Backend Development"</span></span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">6</span>
-                                <span style="margin-left: 40px;">self.experience = <span class="code-string">"5+ years"</span></span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">7</span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">8</span>
-                                <span style="margin-left: 20px;"><span class="code-keyword">def</span> <span class="code-function">build_amazing_apps</span>(self):</span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">9</span>
-                                <span style="margin-left: 40px;"><span class="code-keyword">return</span> <span class="code-string">"Scalable & Robust Solutions"</span></span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">10</span>
-                            </div>
-                            <div class="code-line">
-                                <span class="line-number">11</span>
-                                <span class="code-comment"># Always learning and growing! 🚀</span>
-                            </div>
-                        </div>
-                    </div>
+                    {{ code_developer.content|safe }}
                 </div>
             </div>
+            {% endif %}
 
             <div class="skills-container fade-in">
-                <h3 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--text-primary); font-weight: 800;">Technical Arsenal</h3>
+                <h3 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--text-primary); font-weight: 800;">{% trans "Technical Arsenal" %}</h3>
                 <div class="skills-grid">
+                    {% for category in skills_categories %}
                     <div class="skill-category">
-                        <h3><i class="fab fa-python"></i> Backend Development</h3>
+                        <h3><i class="{{ category.icon.svg_code }}"></i>{{ category.name }}</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Django</span>
-                            <span class="skill-tag">FastAPI</span>
-                            <span class="skill-tag">Flask</span>
-                            <span class="skill-tag">REST APIs</span>
-                            <span class="skill-tag">GraphQL</span>
+                            {% for skill in category.skills.all %}
+                            <span class="skill-tag">{{ skill.name }}</span>
+                            {% endfor %}
                         </div>
                     </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-database"></i> Databases & Storage</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">PostgreSQL</span>
-                            <span class="skill-tag">MongoDB</span>
-                            <span class="skill-tag">Redis</span>
-                            <span class="skill-tag">MySQL</span>
-                            <span class="skill-tag">ElasticSearch</span>
-                            <span class="skill-tag">SQLite</span>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fab fa-aws"></i> Cloud & DevOps</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">AWS</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Kubernetes</span>
-                            <span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Terraform</span>
-                            <span class="skill-tag">Jenkins</span>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Celery</span>
-                            <span class="skill-tag">RabbitMQ</span>
-                            <span class="skill-tag">Nginx</span>
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">Postman</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
+     
     <section id="projects" class="section projects">
         <div class="container">
-           <h2 class="section-title fade-in">Featured Projects</h2>
+           <h2 class="section-title fade-in">{% trans "Featured Projects" %}</h2>
             
             <div class="projects-grid">
+                {% for project in projects %}
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <i class="fas fa-shopping-cart project-icon"></i>
+                        <i class="{{ project.icon.svg_code }} project-icon"></i>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">E-Commerce Platform API</h3>
+                        <h3 class="project-title">{{ project.title }}</h3>
                         <p class="project-description">
-                            A comprehensive microservices-based e-commerce API with advanced features including 
-                            real-time inventory management, payment processing, AI-powered recommendations, 
-                            and advanced analytics dashboard.
+                            {{ project.description }}
                         </p>
                         <div class="project-tech">
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Celery</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">AWS</span>
+                            {% for tech in project.technologies.all %}
+                            <span class="tech-tag">{{ tech.name }}</span>
+                            {% endfor %}
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
+                            {% for link in project.links.all %}
+                            <a href="{{ link.link }}" class="project-link">
+                                <i class="{{ link.icon.svg_code }}"></i> {{ link.name }}
                             </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Analytics Dashboard API</h3>
-                        <p class="project-description">
-                            High-performance analytics API serving real-time data with complex aggregations, 
-                            ML-powered insights, interactive data visualization endpoints, and automated reporting systems.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">WebSocket</span>
-                            <span class="tech-tag">Grafana</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <i class="fas fa-robot project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">AI Chatbot Backend</h3>
-                        <p class="project-description">
-                            Intelligent conversational AI backend with natural language processing, 
-                            context awareness, multi-platform integration, and advanced machine learning capabilities.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">OpenAI</span>
-                            <span class="tech-tag">WebSocket</span>
-                            <span class="tech-tag">NLP</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Try It
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <i class="fas fa-cloud project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Microservices Architecture</h3>
-                        <p class="project-description">
-                            Scalable microservices platform with API gateway, service discovery, 
-                            distributed tracing, automated deployment pipelines, and comprehensive monitoring.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">gRPC</span>
-                            <span class="tech-tag">Prometheus</span>
-                            <span class="tech-tag">Istio</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Architecture
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <i class="fas fa-lock project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Authentication Service</h3>
-                        <p class="project-description">
-                            Enterprise-grade authentication and authorization service with OAuth2, 
-                            JWT tokens, MFA, comprehensive security features, and SSO integration.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">JWT</span>
-                            <span class="tech-tag">OAuth2</span>
-                            <span class="tech-tag">2FA</span>
-                            <span class="tech-tag">LDAP</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-book"></i> Docs
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in">
-                    <div class="project-image">
-                        <i class="fas fa-stream project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Real-time Data Pipeline</h3>
-                        <p class="project-description">
-                            High-throughput data processing pipeline with stream processing, 
-                            event sourcing, real-time analytics, and automated data quality monitoring.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Apache Kafka</span>
-                            <span class="tech-tag">Apache Spark</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">InfluxDB</span>
-                            <span class="tech-tag">Airflow</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-chart-bar"></i> Metrics
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -342,211 +106,55 @@
     <!-- Blog Section -->
     <section id="blog" class="section blog">
         <div class="container">
-            <h2 class="section-title fade-in">Latest Blog Posts</h2>
-            
+            <h2 class="section-title fade-in">{% trans "Latest Blog Posts" %}</h2>
             <div class="blog-grid">
-                <div class="blog-card fade-in" onclick="openBlogModal('blog1')">
+                {% for post in blog_posts %}
+                <div class="blog-card fade-in">
                     <div class="blog-image">
-                        <i class="fas fa-rocket"></i>
-                        <div class="blog-date">Jan 15, 2025</div>
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="post_image">
+                        {% else %}
+                            <i class="{{ post.icon.svg_code }}"></i>
+                        {% endif %}
+                        <div class="blog-date">{{ post.published_date|date:"d F Y" }}</div>
                     </div>
                     <div class="blog-content">
-                        <div class="blog-category">Python Development</div>
-                        <h3 class="blog-title">Building Scalable APIs with FastAPI</h3>
+                        <div class="blog-category">{{ post.post_type }}</div>
+                        <h3 class="blog-title">{{ post.title }}</h3>
                         <p class="blog-excerpt">
-                            Learn how to create high-performance APIs using FastAPI, including best practices 
-                            for authentication, validation, and database integration...
+                            {{ post.excerpt }}
                         </p>
                         <div class="blog-meta">
-                            <span><i class="fas fa-clock"></i> 8 min read</span>
-                            <a href="#" class="read-more">
-                                Read More <i class="fas fa-arrow-right"></i>
+                            <span><i class="fas fa-clock"></i> {{ post.reading_time }} {% trans "min read" %}</span>
+                            <a href="{{ post.get_absolute_url }}" class="read-more">
+                                {% trans "Read More" %} <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-
-                <div class="blog-card fade-in" onclick="openBlogModal('blog2')">
-                    <div class="blog-image">
-                        <i class="fas fa-database"></i>
-                        <div class="blog-date">Jan 10, 2025</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-category">Database Design</div>
-                        <h3 class="blog-title">PostgreSQL Performance Optimization</h3>
-                        <p class="blog-excerpt">
-                            Advanced techniques for optimizing PostgreSQL performance, including indexing strategies, 
-                            query optimization, and connection pooling...
-                        </p>
-                        <div class="blog-meta">
-                            <span><i class="fas fa-clock"></i> 12 min read</span>
-                            <a href="#" class="read-more">
-                                Read More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="blog-card fade-in" onclick="openBlogModal('blog3')">
-                    <div class="blog-image">
-                        <i class="fab fa-docker"></i>
-                        <div class="blog-date">Jan 5, 2025</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-category">DevOps</div>
-                        <h3 class="blog-title">Containerizing Python Applications</h3>
-                        <p class="blog-excerpt">
-                            Complete guide to containerizing Python applications with Docker, including 
-                            multi-stage builds, security best practices, and deployment strategies...
-                        </p>
-                        <div class="blog-meta">
-                            <span><i class="fas fa-clock"></i> 10 min read</span>
-                            <a href="#" class="read-more">
-                                Read More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="blog-card fade-in" onclick="openBlogModal('blog4')">
-                    <div class="blog-image">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="blog-date">Dec 28, 2024</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-category">Security</div>
-                        <h3 class="blog-title">API Security Best Practices</h3>
-                        <p class="blog-excerpt">
-                            Essential security measures for protecting your APIs, including authentication, 
-                            rate limiting, input validation, and monitoring techniques...
-                        </p>
-                        <div class="blog-meta">
-                            <span><i class="fas fa-clock"></i> 15 min read</span>
-                            <a href="#" class="read-more">
-                                Read More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="blog-card fade-in" onclick="openBlogModal('blog5')">
-                    <div class="blog-image">
-                        <i class="fas fa-brain"></i>
-                        <div class="blog-date">Dec 20, 2024</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-category">Machine Learning</div>
-                        <h3 class="blog-title">Integrating ML Models in Production</h3>
-                        <p class="blog-excerpt">
-                            How to successfully deploy machine learning models in production environments, 
-                            including model serving, monitoring, and continuous deployment strategies...
-                        </p>
-                        <div class="blog-meta">
-                            <span><i class="fas fa-clock"></i> 18 min read</span>
-                            <a href="#" class="read-more">
-                                Read More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="blog-card fade-in" onclick="openBlogModal('blog6')">
-                    <div class="blog-image">
-                        <i class="fas fa-cogs"></i>
-                        <div class="blog-date">Dec 15, 2024</div>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-category">Architecture</div>
-                        <h3 class="blog-title">Microservices vs Monolith</h3>
-                        <p class="blog-excerpt">
-                            Comprehensive comparison of microservices and monolithic architectures, 
-                            including when to use each approach and migration strategies...
-                        </p>
-                        <div class="blog-meta">
-                            <span><i class="fas fa-clock"></i> 14 min read</span>
-                            <a href="#" class="read-more">
-                                Read More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
-
-    <!-- Blog Modal -->
-    <div class="blog-modal" id="blogModal">
-        <div class="blog-modal-content">
-            <div class="blog-modal-close" onclick="closeBlogModal()">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="blog-modal-body">
-                <h2 class="blog-modal-title" id="blogModalTitle">Blog Post Title</h2>
-                <div class="blog-modal-text" id="blogModalBody">
-                    <!-- Blog content will be inserted here -->
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Experience Section -->
     <section id="experience" class="section experience">
         <div class="container">
-            <h2 class="section-title fade-in">Professional Journey</h2>
-            
+            <h2 class="section-title fade-in">{% trans "Professional Journey" %}</h2>
             <div class="timeline">
+                {% for exp in experience %}
                 <div class="timeline-item fade-in">
                     <div class="timeline-content">
-                        <div class="timeline-date">2022 - Present</div>
-                        <h3 class="timeline-title">Senior Python Developer</h3>
-                        <p class="timeline-company">Tech Innovations Inc. • Remote</p>
+                        <div class="timeline-date">{{ exp.start_date|date:"F Y" }} - {{ exp.end_date }}</div>
+                        <h3 class="timeline-title">{{ exp.job_title }}</h3>
+                        <p class="timeline-company">{{ exp.company }} • {{ exp.location }}</p>
                         <p class="timeline-description">
-                            Leading backend development for enterprise applications serving 2M+ users. 
-                            Architected microservices infrastructure, implemented CI/CD pipelines, 
-                            and mentored junior developers. Reduced system latency by 40% and improved scalability 
-                            through advanced caching strategies and database optimization.
+                            {{ exp.description }}
                         </p>
                     </div>
                 </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2020 - 2022</div>
-                        <h3 class="timeline-title">Backend Developer</h3>
-                        <p class="timeline-company">StartupXYZ • San Francisco, CA</p>
-                        <p class="timeline-description">
-                            Developed and maintained RESTful APIs using Django and FastAPI serving 500K+ daily requests. 
-                            Implemented automated testing strategies achieving 95% code coverage and database optimization 
-                            techniques. Built real-time features using WebSocket connections and message queues.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2019 - 2020</div>
-                        <h3 class="timeline-title">Python Developer</h3>
-                        <p class="timeline-company">WebDev Solutions • New York, NY</p>
-                        <p class="timeline-description">
-                            Built custom web applications and APIs for diverse clients across various industries. 
-                            Collaborated with frontend teams to deliver full-stack solutions and gained expertise 
-                            in cloud deployment using AWS and containerization technologies with Docker.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item fade-in">
-                    <div class="timeline-content">
-                        <div class="timeline-date">2018 - 2019</div>
-                        <h3 class="timeline-title">Junior Software Engineer</h3>
-                        <p class="timeline-company">Code Academy • Boston, MA</p>
-                        <p class="timeline-description">
-                            Started my professional journey working on educational platform features serving 100K+ students. 
-                            Contributed to Python-based learning management systems and developed strong foundations 
-                            in software engineering best practices, testing, and agile methodologies.
-                        </p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -554,9 +162,10 @@
     <!-- Contact Section -->
     <section id="contact" class="section contact">
         <div class="container">
-            <h2 class="section-title fade-in">Let's Build Something Amazing Together</h2>
+            <h2 class="section-title fade-in">{% trans "Let's Build Something Amazing Together" %}</h2>
             
             <div class="contact-content">
+                {% if contact_info %}
                 <div class="contact-info slide-in-left">
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -564,7 +173,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>john.smith@email.com</p>
+                            <p>{{contact_info.email}}</p>
                         </div>
                     </div>
                     
@@ -574,7 +183,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Phone</h3>
-                            <p>+1 (555) 123-4567</p>
+                            <p>{{contact_info.phone}}</p>
                         </div>
                     </div>
                     
@@ -584,7 +193,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Location</h3>
-                            <p>San Francisco, CA</p>
+                            <p>{{contact_info.address}}</p>
                         </div>
                     </div>
 
@@ -593,45 +202,50 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="contact-details">
-                            <h3>Availability</h3>
-                            <p>Available for freelance projects</p>
+                            <h3>{% trans "Availability" %}</h3>
+                            <p>{% trans "Available for freelance projects" %}</p>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 
-                <form class="contact-form slide-in-right" id="contactForm">
+                <form class="contact-form slide-in-right" id="contactForm" method="post">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        <label for="name">{% trans "Full Name" %}</label>
+                        <input type="text" id="name" name="name" placeholder="Aksin Nezirov" required>
+                        <div class="error-message" id="nameError"></div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <label for="email">{% trans "Email Address" %}</label>
+                        <input type="email" id="email" name="email" placeholder="aksin123@gmail.com" required>
+                        <div class="error-message" id="emailError"></div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Project Discussion" required>
+                        <label for="subject">{% trans "Subject" %}</label>
+                        <input type="text" id="subject" name="subject" placeholder="{% trans "Project Discussion" %}" required>
+                        <div class="error-message" id="subjectError"></div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="6" placeholder="Tell me about your project requirements..." required></textarea>
+                        <label for="message">{% trans "Message" %}</label>
+                        <textarea id="message" name="message" rows="6" placeholder="{% trans "Tell me about your project requirements..." %}" required></textarea>
+                        <div class="error-message" id="messageError"></div>
                     </div>
                     
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Send Message
+                        <i class="fas fa-paper-plane"></i> {% trans "Send Message" %}
                     </button>
                 </form>
             </div>
         </div>
     </section>
-
-    {% block scripts %}
-        <script src="{% static "assets/js/script.js" %}"></script>
-    {% endblock %}
-
 </body>
 </html>
+{% endblock %}
+
+{% block scripts %}
+        <script src="{% static "assets/js/script.js" %}"></script>
 {% endblock %}

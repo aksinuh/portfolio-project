@@ -8,11 +8,19 @@ class Contact(models.Model):
         ('replied', 'Cavablandı'),
         ('spam', 'Spam'),
     ]
+    project_type = [
+        ("Web Development", "Web Development"),
+        ("Backend Development", "Backend Development"),
+        ("API Development", "API Development"),
+        ("Consultation", "Consultation"),
+        ("Other", "Other")
+    ]
     
     name = models.CharField(max_length=100, verbose_name="Ad")
     email = models.EmailField(verbose_name="E-poçt")
     subject = models.CharField(max_length=200, verbose_name="Mövzu")
     message = models.TextField(verbose_name="Mesaj")
+    project_type = models.CharField(max_length=50, choices=project_type, verbose_name="Layihə Növü", null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='new', verbose_name="Status")
     ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name="IP Ünvanı")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Göndərilmə Tarixi")

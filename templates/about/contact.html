@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-    <title>Contact - John Smith</title>
+    <title>{% trans "Contact" %} - Aksin Nezirov</title>
 {% endblock title %}
 
 {% block styles %}
@@ -16,8 +17,8 @@
 {% block content %}
     <!-- Contact Header -->
     <header class="contact-header">
-        <h1>Contact</h1>
-        <p>Gəlin birlikdə bir şey yaradaq</p>
+        <h1>{% trans "Contact" %}</h1>
+        <p>{% trans "Let's create something together" %}</p>
     </header>
 
     <!-- Contact Section -->
@@ -25,6 +26,7 @@
         <div class="container">
             <div class="contact-content">
                 <!-- Contact Info -->
+                {% if contact_info %}
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -32,7 +34,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>john.smith@email.com</p>
+                            <p>{{ contact_info.email }}</p>
                         </div>
                     </div>
                     
@@ -42,7 +44,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Phone</h3>
-                            <p>+1 (555) 123-4567</p>
+                            <p>{{ contact_info.phone }}</p>
                         </div>
                     </div>
                     
@@ -52,7 +54,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Location</h3>
-                            <p>San Francisco, CA</p>
+                            <p>{{ contact_info.address }}</p>
                         </div>
                     </div>
 
@@ -61,69 +63,68 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="contact-details">
-                            <h3>Availability</h3>
-                            <p>Available for freelance projects</p>
+                            <h3>{% trans "Availability" %}</h3>
+                            <p>{% trans "Available for freelance projects" %}</p>
                         </div>
                     </div>
+                    {% endif %}
 
                     <!-- Social Links -->
                     <div class="social-contact">
-                        <h3>Follow Me</h3>
+                        <h3>{% trans "Follow Me" %}</h3>
                         <div class="social-links-contact">
-                            <a href="#" class="social-link-contact" title="GitHub">
-                                <i class="fab fa-github"></i>
+                            {% for link in social_links %}
+                            <a href="{{ link.url }}" class="social-link-contact" title="{{ link.name }}">
+                                <i class="{{ link.icon.svg_code }}"></i>
                             </a>
-                            <a href="#" class="social-link-contact" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="social-link-contact" title="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-link-contact" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 
                 <!-- Contact Form -->
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" method="POST" id="contactForm">
+                    {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            <label for="name">{% trans "Full Name" %}</label>
+                            <input type="text" id="name" name="name" placeholder="Aksin Nezirov" required>
+                            <div class="error-message" id="nameError"></div>
                         </div>
-                        
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            <label for="email">{% trans "Email Address" %}</label>
+                            <input type="email" id="email" name="email" placeholder="aksin123@gmail.com" required>
+                            <div class="error-message" id="emailError"></div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Project Discussion" required>
+                        <label for="subject">{% trans "Subject" %}</label>
+                        <input type="text" id="subject" name="subject" placeholder="{% trans "Project Discussion" %}" required>
+                        <div class="error-message" id="subjectError"></div>
                     </div>
 
                     <div class="form-group">
-                        <label for="project-type">Project Type</label>
-                        <select id="project-type" name="project-type" required>
-                            <option value="" style="color: #333333;">Select project type</option>
-                            <option value="web-development" style="color: #333333;">Web Development</option>
-                            <option value="mobile-app" style="color: #333333;">Mobile Application</option>
-                            <option value="api-development" style="color: #333333;">API Development</option>
-                            <option value="consultation" style="color: #333333;">Consultation</option>
-                            <option value="other" style="color: #333333;">Other</option>
+                        <label for="project-type">{% trans "Project Type" %}</label>
+                        <select id="project-type" name="project_type" required>
+                            <option value="" style="color: #333333;">{% trans "Select project type" %}</option>
+                            <option value="Web Development" style="color: #333333;">{% trans "Web Development" %}</option>
+                            <option value="Backend Development" style="color: #333333;">{% trans "Backend Development" %}</option>
+                            <option value="API Development" style="color: #333333;">{% trans "API Development" %}</option>
+                            <option value="Consultation" style="color: #333333;">{% trans "Consultation" %}</option>
+                            <option value="Other" style="color: #333333;">{% trans "Other" %}</option>
                         </select>
+                        <div class="error-message" id="projectTypeError"></div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="6" placeholder="Tell me about your project requirements, timeline, and budget..." required></textarea>
+                        <label for="message">{% trans "Message" %}</label>
+                        <textarea id="message" name="message" rows="6" placeholder="{% trans "Tell me about your project..." %}" required></textarea>
+                        <div class="error-message" id="messageError"></div>
                     </div>
-                    
+
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Send Message
+                        <i class="fas fa-paper-plane"></i> {% trans "Send Message" %}
                     </button>
                 </form>
             </div>
@@ -132,7 +133,7 @@
             <div class="map-section">
                 <div class="map-placeholder">
                     <i class="fas fa-map-marked-alt"></i>
-                    <span style="margin-left: 10px;">Interactive Map Location</span>
+                    <span style="margin-left: 10px;">{% trans "Interactive Map Location" %}</span>
                 </div>
             </div>
         </div>

@@ -1,4 +1,210 @@
-    <!-- Loading Screen -->
+{% load i18n %}
+    <style>
+       /* Dil Dəyişmə Stylları */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .language-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-btn .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            min-width: 160px;
+            padding: 8px;
+        }
+
+        .language-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-form {
+            margin: 0;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .language-option:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .language-option.active {
+            background: rgba(var(--accent-rgb), 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .language-option.active:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .lang-flag {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .lang-name {
+            flex: 1;
+        }
+
+        .language-option .fa-check {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Light theme üçün */
+        .light-theme .language-btn {
+            background: rgba(239, 245, 246, 0.63);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme .language-dropdown {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        .light-theme .language-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobil üçün */
+        @media (max-width: 768px) {
+            .language-btn {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            
+            .language-btn .current-lang {
+                display: none;
+            }
+            
+            .language-dropdown {
+                right: -10px;
+                min-width: 140px;
+            }
+            
+            /* Mobile Menu için dil değiştirme */
+            .mobile-language-switcher {
+                margin-top: 20px;
+                padding: 15px;
+                border-top: 1px solid var(--glass-border);
+            }
+            
+            .mobile-language-title {
+                font-size: 14px;
+                color: var(--text-secondary);
+                margin-bottom: 10px;
+                display: block;
+            }
+            
+            .mobile-language-options {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .mobile-language-option {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                background: var(--glass-bg);
+                border: 1px solid var(--glass-border);
+                border-radius: 6px;
+                color: var(--text-primary);
+                text-decoration: none;
+                font-size: 13px;
+                transition: all 0.2s ease;
+            }
+            
+            .mobile-language-option.active {
+                background: var(--accent-color);
+                color: white;
+            }
+            
+            .mobile-language-option:hover {
+                background: var(--accent-color);
+                color: white;
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Animasiya */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .language-dropdown.show {
+            animation: slideIn 0.3s ease;
+        }
+    </style>
+
+<!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -9,25 +215,61 @@
     <!-- Navigation -->
     <nav class="max-navbar" id="max-navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">Aksinh.dev</a>
+            <a href="{% url 'home' %}" class="logo">Aksinh.dev</a>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="{% url 'home' %}" class="nav-link active">Home</a></li>
-                <li><a href="{% url "home" %}#about" class="nav-link">About</a></li>
-                <li><a href="{% url 'projects' %}" class="nav-link">Projects</a></li>
-                <li><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'home' %}" class="nav-link {% if active_page == 'home' %}active{% endif %}">{% trans "Home" %}</a></li>
+                <li><a href="#about" class="nav-link {% if active_page == 'about' %}active{% endif %}">{% trans "About" %}</a></li>
+                <li><a href="{% url 'projects' %}" class="nav-link {% if active_page == 'projects' %}active{% endif %}">{% trans "Projects" %}</a></li>
+                <li><a href="{% url 'blog' %}" class="nav-link {% if active_page == 'blog' %}active{% endif %}">{% trans "Blogs" %}</a></li>
+                <li><a href="#experience" class="nav-link {% if active_page == 'experience' %}active{% endif %}">{% trans "Experience" %}</a></li>
+                <li><a href="{% url 'contact' %}" class="nav-link {% if active_page == 'contact' %}active{% endif %}">{% trans "Contact" %}</a></li>
             </ul>
 
             <div class="nav-actions">
+                <div class="language-switcher">
+                    <button class="language-btn" id="languageToggle">
+                        <i class="fas fa-globe"></i>
+                        <span class="current-lang">{{ request.LANGUAGE_CODE|upper }}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <div class="language-dropdown" id="languageDropdown">
+                        {% get_current_language as CURRENT_LANGUAGE %}
+                        {% get_available_languages as AVAILABLE_LANGUAGES %}
+                        {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                        
+                        {% for language in languages %}
+                            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                <input type="hidden" name="language" value="{{ language.code }}">
+                                
+                                <button type="submit" class="language-option {% if language.code == CURRENT_LANGUAGE %}active{% endif %}">
+                                    <span class="lang-flag">
+                                        {% if language.code == 'az' %}🇦🇿
+                                        {% elif language.code == 'en' %}🇺🇸
+                                        {% elif language.code == 'tr' %}🇹🇷
+                                        {% elif language.code == 'ru' %}🇷🇺
+                                        {% else %}🌐{% endif %}
+                                    </span>
+                                    <span class="lang-name">{{ language.name_local }}</span>
+                                    {% if language.code == CURRENT_LANGUAGE %}
+                                        <i class="fas fa-check"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 <!-- Gündüz/Gecə Modu Butonu -->
                 <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
                     <i class="fas fa-moon"></i>
                 </button>
                 
-                <a href="#contact" class="hire-btn">
-                    <i class="fas fa-handshake"></i> Hire Me
+                <a href="{% url 'contact' %}" class="hire-btn">
+                    <i class="fas fa-handshake"></i> {% trans "Hire Me" %}
                 </a>
             </div>
 
@@ -39,17 +281,46 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" class="mobile-menu-item active">🏠 Home</a>
-        <a href="#about" class="mobile-menu-item">👨‍💻 About</a>
-        <a href="#projects" class="mobile-menu-item">🚀 Projects</a>
-        <a href="#blog" class="mobile-menu-item">📝 Blog</a>
-        <a href="#experience" class="mobile-menu-item">💼 Experience</a>
-        <a href="#contact" class="mobile-menu-item">📞 Contact</a>
+        <a href="{% url 'home' %}" class="mobile-menu-item {% if active_page == 'home' %}active{% endif %}">🏠 {% trans "Home" %}</a>
+        <a href="{% url 'home' %}#about" class="mobile-menu-item {% if active_page == 'about' %}active{% endif %}">👨‍💻 {% trans "About" %}</a>
+        <a href="{% url 'projects' %}" class="mobile-menu-item {% if active_page == 'projects' %}active{% endif %}">🚀 {% trans "Projects" %}</a>
+        <a href="{% url 'blog' %}" class="mobile-menu-item {% if active_page == 'blog' %}active{% endif %}">📝 {% trans "Blogs" %}</a>
+        <a href="#experience" class="mobile-menu-item {% if active_page == 'experience' %}active{% endif %}">💼 {% trans "Experience" %}</a>
+        <a href="{% url 'contact' %}" class="mobile-menu-item {% if active_page == 'contact' %}active{% endif %}">📞 {% trans "Contact" %}</a>
         
         <!-- Mobile Theme Toggle -->
         <button class="mobile-menu-item theme-toggle-mobile" id="themeToggleMobile">
-            🌙 Toggle Theme
+            🌙 {% trans "Toggle Theme" %}
         </button>
+        
+        <!-- Mobile Language Switcher -->
+        <div class="mobile-language-switcher">
+            <span class="mobile-language-title">{% trans "Select Language" %}</span>
+            <div class="mobile-language-options">
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as AVAILABLE_LANGUAGES %}
+                {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                
+                {% for language in languages %}
+                    <form action="{% url 'set_language' %}" method="post" class="language-form">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                        <input type="hidden" name="language" value="{{ language.code }}">
+                        
+                        <button type="submit" class="mobile-language-option {% if language.code == CURRENT_LANGUAGE %}active{% endif %}">
+                            <span class="lang-flag">
+                                {% if language.code == 'az' %}🇦🇿
+                                {% elif language.code == 'en' %}🇺🇸
+                                {% elif language.code == 'tr' %}🇹🇷
+                                {% elif language.code == 'ru' %}🇷🇺
+                                {% else %}🌐{% endif %}
+                            </span>
+                            <span class="lang-name">{{ language.code|upper }}</span>
+                        </button>
+                    </form>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <!-- Hero Section -->
@@ -59,7 +330,11 @@
             <div class="profile-section">
                 <div class="profile-image">
                     <div class="profile-placeholder">
+                    {% if request.user.photo_profil %}
+                        <img src="{{ request.user.photo_profil.url }}" alt="Profile Image">
+                    {% else %}
                         <i class="fas fa-user-tie"></i>
+                    {% endif %}
                     </div>
                 </div>
                 
@@ -97,12 +372,77 @@
                 <span class="typing-text" id="typingText">Python Backend Developer</span>
             </p>
             <div class="hero-buttons">
-                <a href="#projects" class="cta-button">
-                    <i class="fas fa-code"></i> View My Work
+                <a href="{% url 'projects' %}" class="cta-button">
+                    <i class="fas fa-code"></i> {% trans "View My Work" %}
                 </a>
-                <a href="#contact" class="cta-button cta-secondary">
-                    <i class="fas fa-envelope"></i> Get In Touch
+                <a href="{% url 'contact' %}" class="cta-button cta-secondary">
+                    <i class="fas fa-envelope"></i> {% trans "Get In Touch" %}
                 </a>
             </div>
         </div>
     </section>
+
+    <script>
+        class LanguageSwitcher {
+            constructor() {
+                this.toggleBtn = document.getElementById('languageToggle');
+                this.dropdown = document.getElementById('languageDropdown');
+                this.isOpen = false;
+                
+                this.init();
+            }
+            
+            init() {
+                if (!this.toggleBtn || !this.dropdown) return;
+                
+                // Toggle button click
+                this.toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+                
+                // Click outside to close
+                document.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+                
+                // Dropdown içində kliklə bağlanmasın
+                this.dropdown.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+                
+                // Keyboard navigation
+                this.setupKeyboardNavigation();
+            }
+            
+            toggleDropdown() {
+                this.isOpen ? this.closeDropdown() : this.openDropdown();
+            }
+            
+            openDropdown() {
+                this.dropdown.classList.add('show');
+                this.toggleBtn.querySelector('.fa-chevron-down').style.transform = 'rotate(180deg)';
+                this.isOpen = true;
+            }
+            
+            closeDropdown() {
+                this.dropdown.classList.remove('show');
+                this.toggleBtn.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                this.isOpen = false;
+            }
+            
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            new LanguageSwitcher();
+        });
+    </script>
+    

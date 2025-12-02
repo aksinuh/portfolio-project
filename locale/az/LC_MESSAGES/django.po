@@ -1,0 +1,490 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-19 16:42+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\config\settings\base.py:99
+msgid "Azerbaijani"
+msgstr "Azərbaycan"
+
+#: .\templates\404.html:7
+msgid "Page Not Found - 404"
+msgstr "Səhifə Tapılmadı - 404"
+
+#: .\templates\404.html:267 .\templates\404.html:293
+msgid "Go Back"
+msgstr "Geri Qayıt"
+
+#: .\templates\404.html:279
+msgid "Page Not Found"
+msgstr "Səhifə Tapılmadı"
+
+#: .\templates\404.html:282
+msgid ""
+"The page you are looking for might have been removed, had its name changed, "
+"or is temporarily unavailable."
+msgstr ""
+"Axtardığınız səhifə silinmiş, adı dəyişdirilmiş və ya müvəqqəti olaraq əlçatan deyil."
+
+#: .\templates\404.html:288 .\templates\500.html:246
+
+#| msgid "Home"
+msgid "Go Home"
+msgstr "Ana Səhifəyə Get"
+
+#: .\templates\404.html:299
+msgid "Or try searching:"
+msgstr "Və ya axtarış etməyə çalışın:"
+
+#: .\templates\404.html:302
+msgid "Search blog posts..."
+msgstr "Blog yazılarında axtar..."
+
+#: .\templates\500.html:7
+msgid "Server Error - 500"
+msgstr "Server Xətası - 500"
+
+#: .\templates\500.html:237
+msgid "Server Error"
+msgstr "Server Xətası"
+
+#: .\templates\500.html:240
+msgid ""
+"Something went wrong on our end. We're working to fix the issue. Please try "
+"again later."
+msgstr ""
+"Bizim tərəfdə bir xəta baş verdi. Problemi həll etmək üçün çalışırıq. "
+"Zəhmət olmasa, bir az sonra yenidən cəhd edin."
+
+#: .\templates\500.html:251
+msgid "Try Again"
+msgstr "Yenidən Cəhd Et"
+
+#: .\templates\500.html:256
+msgid "Need immediate help?"
+msgstr "Dərhal kömük lazımdır?"
+
+#: .\templates\500.html:260
+msgid "Email Support"
+msgstr "E-poçt Dəstəyi"
+
+#: .\templates\500.html:264
+
+#| msgid "Contact"
+msgid "Contact Form"
+msgstr "Əlaqə Formu"
+
+#: .\templates\about\contact.html:6 .\templates\about\contact.html:20
+#: .\templates\includes\footer.html:29 .\templates\includes\header-2.html:193
+#: .\templates\includes\header.html:226 .\templates\includes\header.html:289
+msgid "Contact"
+msgstr "Əlaqə"
+
+#: .\templates\about\contact.html:21
+msgid "Let's create something together"
+msgstr "Gəlin birlikdə bir şey yaradaq"
+
+#: .\templates\about\contact.html:66 .\templates\home\index.html:205
+msgid "Availability"
+msgstr "Əlçatanlıq"
+
+#: .\templates\about\contact.html:67 .\templates\home\index.html:206
+msgid "Available for freelance projects"
+msgstr "Freelance layihələr üçün mövcuddur"
+
+#: .\templates\about\contact.html:74
+msgid "Follow Me"
+msgstr "Məni izləyin"
+
+#: .\templates\about\contact.html:90 .\templates\home\index.html:215
+msgid "Full Name"
+msgstr "Tam Ad"
+
+#: .\templates\about\contact.html:94 .\templates\home\index.html:220
+msgid "Email Address"
+msgstr "Elektron poçt ünvanı"
+
+#: .\templates\about\contact.html:100 .\templates\home\index.html:225
+msgid "Subject"
+msgstr "Mövzu"
+
+#: .\templates\about\contact.html:101 .\templates\home\index.html:226
+msgid "Project Discussion"
+msgstr "Layihə Müzakirəsi"
+
+#: .\templates\about\contact.html:105
+msgid "Project Type"
+msgstr "Layihə növü"
+
+#: .\templates\about\contact.html:107
+msgid "Select project type"
+msgstr "Layihə növünü seçin"
+
+#: .\templates\about\contact.html:108
+msgid "Web Development"
+msgstr ""
+
+#: .\templates\about\contact.html:109 .\templates\includes\footer.html:37
+msgid "Backend Development"
+msgstr ""
+
+#: .\templates\about\contact.html:110 .\templates\includes\footer.html:38
+msgid "API Development"
+msgstr ""
+
+#: .\templates\about\contact.html:111
+msgid "Consultation"
+msgstr ""
+
+#: .\templates\about\contact.html:112
+msgid "Other"
+msgstr "Digər"
+
+#: .\templates\about\contact.html:117 .\templates\home\index.html:230
+msgid "Message"
+msgstr "Mesaj"
+
+#: .\templates\about\contact.html:118
+msgid "Tell me about your project..."
+msgstr "Mənə layihəniz haqqında danışın..."
+
+#: .\templates\about\contact.html:122 .\templates\about\contact.html:146
+#: .\templates\home\index.html:235 .\templates\home\index.html:251
+msgid "Send Message"
+msgstr "Mesaj Göndər"
+
+#: .\templates\about\contact.html:131
+msgid "Interactive Map Location"
+msgstr "İnteraktiv Xəritə Yeri"
+
+#: .\templates\about\contact.html:144 .\templates\home\index.html:249
+msgid "Sending..."
+msgstr "Göndərilir..."
+
+#: .\templates\about\contact.html:145 .\templates\home\index.html:250
+
+#| msgid "Message"
+msgid "Message Sent!"
+msgstr "Mesaj Göndərildi!"
+
+#: .\templates\about\contact.html:147 .\templates\home\index.html:252
+msgid "Error!"
+msgstr "Xəta!"
+
+#: .\templates\about\contact.html:148 .\templates\home\index.html:253
+msgid "Form submission failed. Please try again."
+msgstr "Form göndərilmədi. Zəhmət olmasa yenidən cəhd edin."
+
+#: .\templates\about\contact.html:149 .\templates\home\index.html:254
+msgid "Your message has been sent successfully!"
+msgstr "Mesajınız uğurla göndərildi!"
+
+#: .\templates\about\contact.html:152 .\templates\home\index.html:257
+msgid "This field is required"
+msgstr "Bu xana mütləq doldurulmalıdır"
+
+#: .\templates\about\contact.html:153 .\templates\home\index.html:258
+msgid "Please enter your name"
+msgstr "Zəhmət olmasa adınızı daxil edin"
+
+#: .\templates\about\contact.html:154 .\templates\home\index.html:259
+msgid "Please enter a valid email"
+msgstr "Zəhmət olmasa düzgün e-poçt ünvanı daxil edin"
+
+#: .\templates\about\contact.html:155 .\templates\home\index.html:260
+msgid "Please enter your message"
+msgstr "Zəhmət olmasa mesajınızı daxil edin"
+
+#: .\templates\about\contact.html:156 .\templates\home\index.html:261
+msgid "Please enter a subject"
+msgstr "Zəhmət olmasa mövzu daxil edin"
+
+#: .\templates\blogs\blog-detail.html:7
+msgid "Blog Detail"
+msgstr "Blog Təfərrüatı"
+
+#: .\templates\blogs\blog-detail.html:31 .\templates\blogs\blog.html:76
+#: .\templates\home\index.html:128
+msgid "min read"
+msgstr "dəqiqə oxu"
+
+#: .\templates\blogs\blog-detail.html:50
+msgid "Table of Contents"
+msgstr "Məzmun"
+
+#: .\templates\blogs\blog-detail.html:68
+msgid "Back to Blog"
+msgstr "Blog səhifəsinə qayıt"
+
+#: .\templates\blogs\blog-detail.html:74
+msgid "Share:"
+msgstr "Paylaş:"
+
+#: .\templates\blogs\blog-detail.html:110
+msgid "Link copied!"
+msgstr "Link kopyalandı!"
+
+#: .\templates\blogs\blog.html:5 .\templates\blogs\blog.html:18
+#: .\templates\includes\header-2.html:187 .\templates\includes\header.html:224
+#: .\templates\includes\header.html:287
+msgid "Blogs"
+msgstr "Blog"
+
+#: .\templates\blogs\blog.html:19
+msgid "My latest articles and news"
+msgstr "Ən son məqalələrim və xəbərlərim"
+
+#: .\templates\blogs\blog.html:34 .\templates\projects\projects.html:36
+msgid "All"
+msgstr "Hamısı"
+
+#: .\templates\blogs\blog.html:79 .\templates\home\index.html:130
+msgid "Read More"
+msgstr "Daha Ətraflı"
+
+#: .\templates\blogs\blog.html:92 .\templates\projects\projects.html:125
+msgid "No results found"
+msgstr "Nəticə tapılmadı"
+
+#: .\templates\blogs\blog.html:95
+msgid "No blogs found matching your search."
+msgstr "Axtarışınıza uyğun blog tapılmadı."
+
+#: .\templates\blogs\blog.html:97
+msgid "No blogs found in this category."
+msgstr "Bu kateqoriyada heç bir bloq tapılmadı."
+
+#: .\templates\blogs\blog.html:101
+msgid "What to do:"
+msgstr "Nə etməli:"
+
+#: .\templates\blogs\blog.html:103 .\templates\projects\projects.html:136
+msgid "Change your search query"
+msgstr "Axtarış sorğunuzu dəyişdirin"
+
+#: .\templates\blogs\blog.html:104
+msgid "Select a different category"
+msgstr "Fərqli bir kateqoriya seçin"
+
+#: .\templates\blogs\blog.html:105
+msgid "Select 'All' to view all blogs"
+msgstr "'Hamısı' seçin ki, bütün blogları görə biləsiniz"
+
+#: .\templates\blogs\blog.html:108
+msgid "View All Blogs"
+msgstr "Bütün Bloqları Görün"
+
+#: .\templates\home\index.html:18 .\templates\includes\footer.html:26
+msgid "About Me"
+msgstr "Haqqımda"
+
+#: .\templates\home\index.html:27
+msgid "Projects Completed"
+msgstr "Tamamlanmış layihələr"
+
+#: .\templates\home\index.html:31
+msgid "Years Experience"
+msgstr "İl Təcrübə"
+
+#: .\templates\home\index.html:35 .\templates\projects\projects.html:66
+msgid "Happy Clients"
+msgstr "Məmnun Müştərilər"
+
+#: .\templates\home\index.html:39 .\templates\projects\projects.html:82
+msgid "Success Rate"
+msgstr "Uğur Faizi"
+
+#: .\templates\home\index.html:53
+msgid "Technical Arsenal"
+msgstr "Texniki Bacarıqlar"
+
+#: .\templates\home\index.html:74
+msgid "Featured Projects"
+msgstr "Seçilmiş Layihələr"
+
+#: .\templates\home\index.html:109
+msgid "Latest Blog Posts"
+msgstr "Ən Son Blog Yazıları"
+
+#: .\templates\home\index.html:144
+msgid "Professional Journey"
+msgstr "Peşəkar Səfər"
+
+#: .\templates\home\index.html:165
+msgid "Let's Build Something Amazing Together"
+msgstr "Gəlin Birlikdə Heyrətamiz Bir Şey Quraq"
+
+#: .\templates\home\index.html:231
+msgid "Tell me about your project requirements..."
+msgstr "Mənə layihə tələblərinizdən danışın..."
+
+#: .\templates\home\index.html:264
+msgid "Python Backend Developer"
+msgstr ""
+
+#: .\templates\home\index.html:265
+msgid "API Architecture Expert"
+msgstr ""
+
+#: .\templates\home\index.html:266
+msgid "Microservices Specialist"
+msgstr ""
+
+#: .\templates\home\index.html:267
+msgid "Full Stack Developer"
+msgstr ""
+
+#: .\templates\home\index.html:270
+msgid "Initializing backend systems..."
+msgstr "Backend sistemləri başladılır..."
+
+#: .\templates\home\index.html:271
+msgid "Loading Python modules..."
+msgstr "Python modulları yüklənir..."
+
+#: .\templates\home\index.html:272
+msgid "Connecting to databases..."
+msgstr "Verilənlər bazasına qoşulur..."
+
+#: .\templates\home\index.html:273
+msgid "Optimizing performance..."
+msgstr "Məhsuldarlıq optimallaşdırılır..."
+
+#: .\templates\home\index.html:274
+msgid "Almost ready..."
+msgstr "Demək olar ki, hazırdır..."
+
+#: .\templates\home\index.html:277
+msgid "Matrix Mode Activated!"
+msgstr "Matrix Rejimi Aktivləşdirildi!"
+
+#: .\templates\home\index.html:278
+msgid "Welcome to the code matrix..."
+msgstr "Kod matrixsinə xoş gəlmisiniz..."
+
+#: .\templates\includes\footer.html:10
+msgid ""
+"I provide backend solutions with modern Python technologies and high-quality "
+"coding."
+msgstr ""
+"Mən müasir Python texnologiyaları və yüksək keyfiyyətli kodlaşdırma ilə "
+"backend həlləri təqdim edirəm."
+
+#: .\templates\includes\footer.html:23
+msgid "Pages"
+msgstr "Səhifələr"
+
+#: .\templates\includes\footer.html:25 .\templates\includes\header-2.html:169
+#: .\templates\includes\header.html:221 .\templates\includes\header.html:284
+msgid "Home"
+msgstr "Ana səhifə"
+
+#: .\templates\includes\footer.html:27 .\templates\includes\header-2.html:181
+#: .\templates\includes\header.html:223 .\templates\includes\header.html:286
+#: .\templates\projects\projects.html:6 .\templates\projects\projects.html:20
+msgid "Projects"
+msgstr "Layihələr"
+
+#: .\templates\includes\footer.html:28
+msgid "Blog"
+msgstr "Blog"
+
+#: .\templates\includes\footer.html:35
+msgid "Services"
+msgstr "Xidmətlər"
+
+#: .\templates\includes\footer.html:39
+msgid "Database"
+msgstr ""
+
+#: .\templates\includes\footer.html:40
+msgid "Cloud Architecture"
+msgstr ""
+
+#: .\templates\includes\footer.html:41
+msgid "Security"
+msgstr "Təhlükəsizlik"
+
+#: .\templates\includes\footer.html:47
+msgid "Technologies"
+msgstr "Texnologiyalar"
+
+#: .\templates\includes\header-2.html:175 .\templates\includes\header.html:222
+#: .\templates\includes\header.html:285
+msgid "About"
+msgstr "Haqqımda"
+
+#: .\templates\includes\header.html:225 .\templates\includes\header.html:288
+msgid "Experience"
+msgstr "Təcrübə"
+
+#: .\templates\includes\header.html:272
+msgid "Hire Me"
+msgstr "İş Təklifi"
+
+#: .\templates\includes\header.html:293
+msgid "Toggle Theme"
+msgstr "Temanı Dəyiş"
+
+#: .\templates\includes\header.html:298
+msgid "Select Language"
+msgstr "Dil Seçin"
+
+#: .\templates\includes\header.html:376
+msgid "View My Work"
+msgstr "İşlərimə Baxın"
+
+#: .\templates\includes\header.html:379
+msgid "Get In Touch"
+msgstr "Əlaqə Saxlayın"
+
+#: .\templates\projects\projects.html:21
+msgid "Innovative projects and solutions I have created"
+msgstr "Mənim yaratdığım innovativ layihələr və həllər"
+
+#: .\templates\projects\projects.html:58
+msgid "Completed Projects"
+msgstr "Tamamlanmış Layihələr"
+
+#: .\templates\projects\projects.html:74
+msgid "Years of Experience"
+msgstr "İl Təcrübə"
+
+#: .\templates\projects\projects.html:128
+msgid "No projects found matching your search."
+msgstr "Sizin axtarışınıza uyğun heç bir layihə tapılmadı."
+
+#: .\templates\projects\projects.html:130
+msgid "No projects found in this category."
+msgstr "Bu kateqoriyada heç bir layihə tapılmadı."
+
+#: .\templates\projects\projects.html:134
+msgid "What you can do:"
+msgstr "Nə etməli:"
+
+#: .\templates\projects\projects.html:137
+msgid "Select another category"
+msgstr "Fərqli bir kateqoriya seçin"
+
+#: .\templates\projects\projects.html:138
+msgid "Select 'All' to view all projects"
+msgstr "'Hamısı' seçin ki, bütün layihələri görə biləsiniz"
+
+#: .\templates\projects\projects.html:141
+msgid "View All Projects"
+msgstr "Bütün layihələrə bax"

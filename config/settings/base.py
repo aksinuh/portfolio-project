@@ -12,9 +12,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY", default="rh6m4n-xbfkxie2)mt&3=e+cge(zpqci)yi7mvlrn1@+kn44(+")
 
 
-ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
+    "jazzmin",
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,6 +35,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -57,16 +59,19 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'apps.pages.context_processors.active_page',
+                'apps.pages.context_processors.social_links',
             ],
         },
     },
 ]
 
+
+handler404 = 'apps.pages.home.views.custom_404'
+handler500 = 'apps.pages.home.views.custom_500'
+
+
 WSGI_APPLICATION = "config.wsgi.application"
 
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="sqlite:///db.sqlite3")
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -78,23 +83,25 @@ AUTH_PASSWORD_VALIDATORS = [
 from django.utils.translation import gettext_lazy as _
 
 # Dil və zaman konfiqurasiyası
-LANGUAGE_CODE = 'az'  # ✅ Azərbaycan dili
-TIME_ZONE = 'Asia/Baku'  # ✅ Bakı zaman zonası
-USE_I18N = True  # ✅ Beynəlxalqlaşdırma aktiv
-USE_L10N = True  # ✅ Lokallaşdırma aktiv
-USE_TZ = True  # ✅ Zaman zonası aktiv
+LANGUAGE_CODE = 'az' 
+TIME_ZONE = 'UTC' 
+USE_I18N = True 
+USE_L10N = True  
+USE_TZ = True  
 
 # Dillər siyahısı
-LANGUAGES = [
-    ('az', _('Azərbaycan')),
-    ('en', _('İngilis')),
-]
-
+LANGUAGES = (
+    ('en', 'English'),
+    ('tr', 'Turkish'),
+    ('az', _('Azerbaijani')),
+)
 # Lokal fayllar yolu
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'az'
+MODELTRANSLATION_LANGUAGES = ('az', 'tr', 'en',)
 
 # Static files konfiqurasiyası
 STATIC_URL = '/static/'
@@ -104,6 +111,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
 
 # Media files
 MEDIA_URL = '/media/'

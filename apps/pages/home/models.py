@@ -72,18 +72,14 @@ class About(models.Model):
 
 
 class CodeDeveloper(models.Model):
-    name = models.CharField(max_length=100)
-    skills = models.TextField()
-    experience = models.TextField()
-    passion = models.TextField()
-    about = models.TextField()
+    content = models.TextField()
     
     class Meta:
         verbose_name = "Kod Tərtibatçısı"
         verbose_name_plural = "Kod Tərtibatçıları"
         
     def __str__(self):
-        return self.name
+        return self.content[:30] + "..."
     
 
 class SkillsCategory(models.Model):
@@ -100,7 +96,7 @@ class SkillsCategory(models.Model):
 
 
 class Skill(models.Model):
-    category = models.ForeignKey(SkillsCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(SkillsCategory, on_delete=models.CASCADE , related_name='skills')
     name = models.CharField(max_length=100)
     
     class Meta:

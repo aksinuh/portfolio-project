@@ -2,6 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 from .models import BlogPost, Category, Tag
+from django.db.models import Q
 
 class BlogDetailView(DetailView):
     model = BlogPost
@@ -33,18 +34,18 @@ class BlogListView(ListView):
         queryset = BlogPost.objects.filter(is_published=True)
 
         # Axtarış parametri
-        search = self.request.GET.get("q")
+        search = self.request.GET.get("q", "").strip()
         if search:
             queryset = queryset.filter(
-                title__icontains=search
-            ) | queryset.filter(
-                excerpt__icontains=search
-            )
+                Q(title__icontains=search) |
+                Q(content__icontains=search) |
+                Q(category__name__icontains=search)
+            ).distinct()
 
         # Kateqoriya filtiri (slug)
         category = self.request.GET.get("category")
         if category and category != "all":
-            queryset = queryset.filter(category__slug=category)
+            queryset = queryset.filter(category__slug=category).distinct()
 
         return queryset
 

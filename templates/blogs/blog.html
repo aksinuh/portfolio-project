@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}<title>Blog - John Smith</title>{% endblock title %}
+{% block title %}<title>{% trans "Blogs" %} - Aksin Nezirov</title>{% endblock title %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'assets/css/blog.css' %}">
@@ -14,8 +15,8 @@
 {% block content %}
     <!-- Blog Header -->
     <header class="blog-header">
-        <h1>Blog</h1>
-        <p>Ən son məqalələrim və xəbərlərim</p>
+        <h1>{% trans "Blogs" %}</h1>
+        <p>{% trans "My latest articles and news" %}</p>
     </header>
 
     <!-- Filter Section -->
@@ -30,7 +31,7 @@
                 <div class="filter-tags">
                     <a href="?category=all{% if search_query %}&q={{search_query}}{% endif %}"
                     class="filter-tag {% if selected_category == 'all' %}active{% endif %}">
-                    Hamısı
+                    {% trans "All" %}
                     </a>
 
                     {% for cat in categories %}
@@ -48,7 +49,8 @@
     <section class="blog-section">
         <div class="container">
             <div class="blog-grid" id="blogGrid">
-                <!-- Blog Card 1 -->
+                <!-- Blog Card -->
+            {% if posts %}
                 {% for post in posts %}
                 <article class="blog-card" data-category="{{ post.category.slug }} {{ post.post_type|lower }}">
                     <div class="blog-image">
@@ -71,19 +73,41 @@
                         <div class="blog-meta">
                             <span class="read-time">
                                 <i class="far fa-clock"></i>
-                                {{ post.reading_time }} dəq
+                                {{ post.reading_time }} {% trans "min read" %}
                             </span>
                             <a href="{{ post.get_absolute_url }}" class="read-more">
-                                Daha ətraflı
+                                {% trans "Read More" %}
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </article>
-                {% endfor %}
-
-                <!-- Blog Card 2 -->
-               
+                {% endfor %}  
+            {% else %}
+                <!-- Heç bir nəticə tapılmadığında göstəriləcək mesaj -->
+                <div class="no-results">
+                    <div class="no-results-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="no-results-title">{% trans "No results found" %}</h3>
+                    <p class="no-results-message">
+                        {% if search_query %}
+                            "{{ search_query }}" {% trans "No blogs found matching your search." %}
+                        {% else %}
+                            {% trans "No blogs found in this category." %}
+                        {% endif %}
+                    </p>
+                    <div class="no-results-suggestions">
+                        <p>{% trans "What to do:" %}</p>
+                        <ul>
+                            <li>{% trans "Change your search query" %}</li>
+                            <li>{% trans "Select a different category" %}</li>
+                            <li>{% trans "Select 'All' to view all blogs" %}</li>
+                        </ul>
+                    </div>
+                    <a href="?category=all" class="btn btn-primary">{% trans "View All Blogs" %}</a>
+                </div>
+            {% endif %}  
             </div>
         </div>
     </section>

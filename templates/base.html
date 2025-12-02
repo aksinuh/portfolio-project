@@ -1,13 +1,15 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %}<title>Aksinh.dev - Python Backend Developer</title>{% endblock %}
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    {% block title %}<title>Akşin Nəzirov - Python Backend Developer</title>{% endblock %}
+    <link rel="icon" href="{% static 'assets/images/favicon-128x128.png' %}" sizes="128x128" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 
     {% block styles %}{% endblock %}
 
@@ -21,6 +23,40 @@
     {% block content %}{% endblock content %}
 
     {% include 'includes/footer.html' %}
+
+    <script>
+        // Yalnız bir dəfə təyin et
+        if (typeof window.DJANGO_CONTEXT === 'undefined') {
+            window.DJANGO_CONTEXT = {
+                translations: {
+                    sending: "{% trans 'Sending...' %}",
+                    sentSuccess: "{% trans 'Message Sent!' %}",
+                    sendMessage: "{% trans 'Send Message' %}",
+                    error: "{% trans 'Error!' %}",
+                    formError: "{% trans 'Form submission failed. Please try again.' %}",
+                    successMessage: "{% trans 'Your message has been sent successfully!' %}",
+                    requiredField: "{% trans 'This field is required' %}",
+                    nameRequired: "{% trans 'Please enter your name' %}",
+                    emailRequired: "{% trans 'Please enter a valid email' %}",
+                    messageRequired: "{% trans 'Please enter your message' %}",
+                    subjectRequired: "{% trans 'Please enter a subject' %}",
+                    typingText1: "{% trans 'Python Backend Developer' %}",
+                    typingText2: "{% trans 'API Architecture Expert' %}",
+                    typingText3: "{% trans 'Microservices Specialist' %}",
+                    typingText4: "{% trans 'Full Stack Developer' %}",
+                    loadingMessage1: "{% trans 'Initializing backend systems...' %}",
+                    loadingMessage2: "{% trans 'Loading Python modules...' %}",
+                    loadingMessage3: "{% trans 'Connecting to databases...' %}",
+                    loadingMessage4: "{% trans 'Optimizing performance...' %}",
+                    loadingMessage5: "{% trans 'Almost ready...' %}",
+                    matrixMode: "{% trans 'Matrix Mode Activated!' %}",
+                    welcomeMatrix: "{% trans 'Welcome to the code matrix...' %}"
+                },
+                currentLanguage: "{{ request.LANGUAGE_CODE }}",
+                csrfToken: "{{ csrf_token }}"
+            };
+        }
+    </script>
 
     {% block scripts %}{% endblock scripts %}
     

@@ -1,47 +1,306 @@
+   {% load i18n %}
    <!-- Navigation -->
+    <style>
+        /* Dil Dəyişmə Stylları */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .language-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-btn .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            min-width: 160px;
+            padding: 8px;
+        }
+
+        .language-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-form {
+            margin: 0;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .language-option:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .language-option.active {
+            background: rgba(var(--accent-rgb), 0.1);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .language-option.active:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .lang-flag {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .lang-name {
+            flex: 1;
+        }
+
+        .language-option .fa-check {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Light theme üçün */
+        .light-theme .language-btn {
+            background: rgba(239, 245, 246, 0.63);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme .language-dropdown {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        .light-theme .language-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* Mobil üçün */
+        @media (max-width: 768px) {
+            .language-btn {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            
+            .language-btn .current-lang {
+                display: none;
+            }
+            
+            .language-dropdown {
+                right: -10px;
+                min-width: 140px;
+            }
+        }
+
+        /* Animasiya */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .language-dropdown.show {
+            animation: slideIn 0.3s ease;
+        }
+    </style>
     <nav class="max-navbar">
         <div class="nav-container">
-            <a href="{% url "home" %}" class="logo">John.dev</a>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
+            <a href="{% url "home" %}" class="logo">Aksinh.dev</a>
             <ul class="nav-menu">
                 <li>
                     <a href="{% url 'home' %}" 
                     class="nav-link {% if active_page == 'home' %}active{% endif %}">
-                        Home
+                        {% trans "Home" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url "home" %}#about" 
                     class="nav-link {% if active_page == 'about' %}active{% endif %}">
-                        About
+                        {% trans "About" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'projects' %}" 
                     class="nav-link {% if active_page == 'projects' %}active{% endif %}">
-                        Projects
+                        {% trans "Projects" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'blog' %}" 
                     class="nav-link {% if active_page == 'blog' %}active{% endif %}">
-                        Blog
+                        {% trans "Blogs" %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'contact' %}" 
                     class="nav-link {% if active_page == 'contact' %}active{% endif %}">
-                        Contact
+                        {% trans "Contact" %}
                     </a>
                 </li>
             </ul>
+            <div class="language-switcher">
+                <button class="language-btn" id="languageToggle">
+                    <i class="fas fa-globe"></i>
+                    <span class="current-lang">{{ request.LANGUAGE_CODE|upper }}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                
+                <div class="language-dropdown" id="languageDropdown">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                    
+                    {% for language in languages %}
+                        <form action="{% url 'set_language' %}" method="post" class="language-form">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                            <input type="hidden" name="language" value="{{ language.code }}">
+                            
+                            <button type="submit" class="language-option {% if language.code == CURRENT_LANGUAGE %}active{% endif %}">
+                                <span class="lang-flag">
+                                    {% if language.code == 'az' %}🇦🇿
+                                    {% elif language.code == 'en' %}🇺🇸
+                                    {% elif language.code == 'tr' %}🇹🇷
+                                    {% elif language.code == 'ru' %}🇷🇺
+                                    {% else %}🌐{% endif %}
+                                </span>
+                                <span class="lang-name">{{ language.name_local }}</span>
+                                {% if language.code == CURRENT_LANGUAGE %}
+                                    <i class="fas fa-check"></i>
+                                {% endif %}
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
+
             <div class="nav-actions">
                 <div class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </div>
             </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </nav>
+    <script>
+        class LanguageSwitcher {
+            constructor() {
+                this.toggleBtn = document.getElementById('languageToggle');
+                this.dropdown = document.getElementById('languageDropdown');
+                this.isOpen = false;
+                
+                this.init();
+            }
+            
+            init() {
+                if (!this.toggleBtn || !this.dropdown) return;
+                
+                // Toggle button click
+                this.toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+                
+                // Click outside to close
+                document.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+                
+                // Dropdown içində kliklə bağlanmasın
+                this.dropdown.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+                
+                // Keyboard navigation
+                this.setupKeyboardNavigation();
+            }
+            
+            toggleDropdown() {
+                this.isOpen ? this.closeDropdown() : this.openDropdown();
+            }
+            
+            openDropdown() {
+                this.dropdown.classList.add('show');
+                this.toggleBtn.querySelector('.fa-chevron-down').style.transform = 'rotate(180deg)';
+                this.isOpen = true;
+            }
+            
+            closeDropdown() {
+                this.dropdown.classList.remove('show');
+                this.toggleBtn.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                this.isOpen = false;
+            }
+            
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            new LanguageSwitcher();
+        });
+    </script>
     

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}
-    <title>Projects - John Smith</title>
+    <title>{% trans "Projects" %} - Aksin Nezirov </title>
 {% endblock title %}
 
 {% block styles %}
@@ -16,24 +17,31 @@
 {% block content %}
     <!-- Projects Header -->
     <header class="projects-header">
-        <h1>Projects</h1>
-        <p>Yaratdığım innovativ layihələr və həllər</p>
+        <h1>{% trans "Projects" %}</h1>
+        <p>{% trans "Innovative projects and solutions I have created" %}</p>
     </header>
 
     <!-- Filter Section -->
     <section class="filter-section">
         <div class="container">
             <div class="filter-container">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="🔍 Layihələrdə axtar...">
-                </div>
+                <form method="get" class="search-box neon-search">
+                    <input type="text" name="q" placeholder="🔍 Axtar..." value="{{ search_query }}">
+                    <button type="submit" class="fa fa-search search-btn"></button>
+                </form>
+                
                 <div class="filter-tags">
-                    <button class="filter-tag active" data-category="all">Hamısı</button>
-                    <button class="filter-tag" data-category="web">Web App</button>
-                    <button class="filter-tag" data-category="mobile">Mobile</button>
-                    <button class="filter-tag" data-category="api">API</button>
-                    <button class="filter-tag" data-category="ai">AI/ML</button>
-                    <button class="filter-tag" data-category="ecommerce">E-commerce</button>
+                    <a href="?category=all{% if search_query %}&q={{search_query}}{% endif %}"
+                    class="filter-tag {% if selected_category == 'all' %}active{% endif %}">
+                    {% trans "All" %}
+                    </a>
+
+                    {% for cat in categories %}
+                    <a href="?category={{ cat.slug }}{% if search_query %}&q={{search_query}}{% endif %}"
+                    class="filter-tag {% if selected_category == cat.slug %}active{% endif %}">
+                    {{ cat.name }}
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -44,25 +52,26 @@
         <div class="container">
             <div class="project-stats">
                 <div class="stat-card">
+                    {% if about %}
                     <i class="fas fa-rocket stat-icon"></i>
-                    <span class="stat-number" data-count="50">0</span>
-                    <div class="stat-label">Tamamlanmış Layihə</div>
+                    <span class="stat-number" data-count="{{ about.projects_count }}">0</span>
+                    <div class="stat-label">{% trans "Completed Projects" %}</div>
                     <div class="stat-progress">
                         <div class="stat-progress-bar"></div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-users stat-icon"></i>
-                    <span class="stat-number" data-count="25">0</span>
-                    <div class="stat-label">Xoş Müştəri</div>
+                    <span class="stat-number" data-count="{{ about.clients_count }}">0</span>
+                    <div class="stat-label">{% trans "Happy Clients" %}</div>
                     <div class="stat-progress">
                         <div class="stat-progress-bar"></div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-calendar-alt stat-icon"></i>
-                    <span class="stat-number" data-count="5">0</span>
-                    <div class="stat-label">İl Təcrübə</div>
+                    <span class="stat-number" data-count="{{ about.years_experience }}">0</span>
+                    <div class="stat-label">{% trans "Years of Experience" %}</div>
                     <div class="stat-progress">
                         <div class="stat-progress-bar"></div>
                     </div>
@@ -70,187 +79,68 @@
                 <div class="stat-card">
                     <i class="fas fa-trophy stat-icon"></i>
                     <span class="stat-number" data-count="99">0</span>
-                    <div class="stat-label">Uğur Dərəcəsi</div>
+                    <div class="stat-label">{% trans "Success Rate" %}</div>
                     <div class="stat-progress">
                         <div class="stat-progress-bar"></div>
                     </div>
                 </div>
             </div>
+            {% endif %}
 
             <div class="projects-grid" id="projectsGrid">
-                <!-- Project 1 -->
-                <article class="project-card" data-category="web api">
+                <!-- Project -->
+            {% if projects %}
+                {% for project in projects %}
+                <article class="project-card" data-category="{{ project.categories.first.id }}">
                     <div class="project-image">
-                        <i class="fas fa-shopping-cart project-icon"></i>
+                        <i class="{{ project.icon.svg_code }} project-icon"></i>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <h3 class="project-title">{{ project.title }}</h3>
                         <p class="project-description">
-                            Tam funksional e-ticaret platforması real-time inventory management, 
-                            ödəniş inteqrasiyası və AI-powered məsləhətlər sistemi ilə.
+                            {{ project.description }}
                         </p>
+                        
                         <div class="project-tech">
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Docker</span>
+                            {% for tech in project.technologies.all %}
+                            <span class="tech-tag">{{tech.name}}</span>
+                            {% endfor %}
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
+                            {% for link in project.links.all %}
+                            <a href="{{ link.link }}" class="project-link">
+                                <i class="{{ link.icon.svg_code }}"></i> {{ link.name }}
                             </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Demo
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
                 </article>
-
-                <!-- Project 2 -->
-                <article class="project-card" data-category="mobile api">
-                    <div class="project-image">
-                        <i class="fas fa-mobile-alt project-icon"></i>
+                {% endfor %}
+            {% else %}
+                <!-- Heç bir nəticə tapılmadığında göstəriləcək mesaj -->
+                <div class="no-results">
+                    <div class="no-results-icon">
+                        <i class="fas fa-search"></i>
                     </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Task Management App</h3>
-                        <p class="project-description">
-                            Real-time task management mobil tətbiqi offline dəstək, team collaboration 
-                            və avtomatik reminder sistemi ilə.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Socket.io</span>
-                            <span class="tech-tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-google-play"></i> Play Store
-                            </a>
-                        </div>
+                    <h3 class="no-results-title">{% trans "No results found" %}</h3>
+                    <p class="no-results-message">
+                        {% if search_query %}
+                            "{{ search_query }}" {% trans "No projects found matching your search." %}
+                        {% else %}
+                            {% trans "No projects found in this category." %}
+                        {% endif %}
+                    </p>
+                    <div class="no-results-suggestions">
+                        <p>{% trans "What you can do:" %}</p>
+                        <ul>
+                            <li>{% trans "Change your search query" %}</li>
+                            <li>{% trans "Select another category" %}</li>
+                            <li>{% trans "Select 'All' to view all projects" %}</li>
+                        </ul>
                     </div>
-                </article>
-
-                <!-- Project 3 -->
-                <article class="project-card" data-category="ai api">
-                    <div class="project-image">
-                        <i class="fas fa-robot project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">AI Content Generator</h3>
-                        <p class="project-description">
-                            GPT-4 əsaslı kontent generasiya platforması multi-language dəstək, 
-                            SEO optimizasiya və content analytics ilə.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">OpenAI</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">AWS</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Try It
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 4 -->
-                <article class="project-card" data-category="web ecommerce">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Analytics Dashboard</h3>
-                        <p class="project-description">
-                            Real-time data analytics dashboard interaktiv qrafiklər, 
-                            custom reports və automated insights ilə.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">D3.js</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">InfluxDB</span>
-                            <span class="tech-tag">WebSocket</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 5 -->
-                <article class="project-card" data-category="api mobile">
-                    <div class="project-image">
-                        <i class="fas fa-cloud project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Cloud Storage API</h3>
-                        <p class="project-description">
-                            Scalable cloud storage API real-time file synchronization, 
-                            advanced security və cross-platform dəstək ilə.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Go</span>
-                            <span class="tech-tag">gRPC</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-book"></i> API Docs
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 6 -->
-                <article class="project-card" data-category="ai web">
-                    <div class="project-image">
-                        <i class="fas fa-brain project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">ML Model Serving</h3>
-                        <p class="project-description">
-                            Machine learning model serving platform auto-scaling, 
-                            model versioning və performance monitoring ilə.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">Kubernetes</span>
-                            <span class="tech-tag">Prometheus</span>
-                            <span class="tech-tag">MLflow</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-server"></i> Deploy
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                    <a href="?category=all" class="btn btn-primary">{% trans "View All Projects" %}</a>
+                </div>
+            {% endif %}
             </div>
         </div>
     </section>

@@ -3,13 +3,8 @@ from django.contrib import admin
 from django import forms
 from django.db import models
 from .models import Category, Tag, BlogPost
+from modeltranslation.admin import TranslationAdmin
 
-class BlogPostForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={'rows': 30}))
-    
-    class Meta:
-        model = BlogPost
-        fields = '__all__'
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -24,8 +19,7 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 @admin.register(BlogPost)
-class BlogPostAdmin(admin.ModelAdmin):
-    form = BlogPostForm
+class BlogPostAdmin(TranslationAdmin):
     list_display = ['title', 'post_type', 'category', 'published_date', 'is_published', 'reading_time']
     list_filter = ['post_type', 'category', 'is_published', 'published_date']
     search_fields = ['title', 'content', 'excerpt']
@@ -49,3 +43,13 @@ class BlogPostAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+    
+    class Media:
+        js = (
+                'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+                'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+                'modeltranslation/js/tabbed_translation_fields.js',
+            )
+        css = {
+                'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+            }
