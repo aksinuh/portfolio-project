@@ -5,12 +5,7 @@ from decouple import config
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-   "aksinh.info",
-   "www.aksinh.info",
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 DATABASES = {
     'default': {

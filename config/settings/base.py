@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
-SECRET_KEY = env("SECRET_KEY", default="rh6m4n-xbfkxie2)mt&3=e+cge(zpqci)yi7mvlrn1@+kn44(+")
+SECRET_KEY = config("SECRET_KEY")
 
 
 
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "whitenoise.runserver_nostatic",
     # third-party
     "rest_framework",
     "apps.pages.home",
